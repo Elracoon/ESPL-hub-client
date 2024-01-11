@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import useStore from "@/lib/store";
-// import loading from "@/lib/loading";
+import loading from "@/lib/loading";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
@@ -44,7 +44,7 @@ export default function AuthForm() {
     const createUser = async () => {
 
         setIsLoading(true);
-        // await loading(2000);
+        await loading(2000);
 
         if (name.length <= 1) {
             toast.error('Choose a username with 2 characters or more');
