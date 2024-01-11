@@ -3,7 +3,7 @@
 }
 
 .flex-row-center-start {
-    @apply flex-row-center justify-start-start;
+    @apply flex-row-center justify-start;
 }
 
 .flex-row-center-between {
@@ -31,7 +31,7 @@
 }
 
 .flex-row-start-start {
-    @apply flex-row-start justify-start-start;
+    @apply flex-row-start justify-start;
 }
 
 .flex-row-start-between {
@@ -59,7 +59,7 @@
 }
 
 .flex-row-end-start {
-    @apply flex-row-end justify-start-start;
+    @apply flex-row-end justify-start;
 }
 
 .flex-row-end-between {
@@ -88,7 +88,7 @@
 }
 
 .flex-col-center-start {
-    @apply flex-col-center justify-start-start;
+    @apply flex-col-center justify-start;
 }
 
 .flex-col-center-between {
@@ -116,7 +116,7 @@
 }
 
 .flex-col-start-start {
-    @apply flex-col-start justify-start-start;
+    @apply flex-col-start justify-start;
 }
 
 .flex-col-start-between {
@@ -144,7 +144,7 @@
 }
 
 .flex-col-end-start {
-    @apply flex-col-end justify-start-start;
+    @apply flex-col-end justify-start;
 }
 
 .flex-col-end-between {
