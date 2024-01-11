@@ -1,5 +1,7 @@
+import AuthAdminForm from "@/components/Forms/AuthAdminForm"
+
 export default function AuthAdmin() {
     return (
-        <h1>AuthAdmin</h1>
+        <AuthAdminForm />
     )
 }
