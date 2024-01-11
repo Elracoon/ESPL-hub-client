@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-// import { Icons } from "@/components/ui/icons";
+import { Icons } from "@/components/ui/icons";
 
 
 export default function AuthForm() {
@@ -144,9 +144,9 @@ export default function AuthForm() {
                             </CardContent>
                             <CardFooter>
                                 <Button disabled={isLoading} onClick={createUser}>
-                                    {/* {isLoading && (
+                                    {isLoading && (
                                         <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                                    )} */}
+                                    )}
                                     S'inscrire
                                 </Button>
                             </CardFooter>
@@ -173,9 +173,9 @@ export default function AuthForm() {
                             </CardContent>
                             <CardFooter>
                                 <Button disabled={isLoading}>
-                                    {/* {isLoading && (
+                                    {isLoading && (
                                         <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                                    )} */}
+                                    )}
                                     Se connecter
                                 </Button>
                             </CardFooter>
