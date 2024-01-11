@@ -18,6 +18,7 @@ export default function AuthForm() {
     const { token, username, signIn, setUsername } = useStore();
 
     const [name, setName] = useState('');
+    const [firstName, setfirstName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -95,29 +96,33 @@ export default function AuthForm() {
     return (
         <Tabs defaultValue="signin" className="w-[400px]">
             <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="login">Log In</TabsTrigger>
+                <TabsTrigger value="signin">Créer un compte</TabsTrigger>
+                <TabsTrigger value="login">Se connecter</TabsTrigger>
             </TabsList>
                 <TabsContent value="signin">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Sign In</CardTitle>
+                            <CardTitle>Créer un compte</CardTitle>
                             <CardDescription>
-                                New here ? Create an account to manage your cats
+                                Nouveau ici ? Créez un compte
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">
                             <div className="space-y-1">
-                                <Label htmlFor="name">Name</Label>
-                                <Input autoComplete="off" id="name" type="text" value={name} placeholder="Your name" onChange={handleChange} />
+                                <Label htmlFor="name">Nom</Label>
+                                <Input autoComplete="off" id="name" type="text" value={name} placeholder="Votre nom" onChange={handleChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="firstName">Prénom</Label>
+                                <Input autoComplete="off" id="firstName" type="text" value={firstName} placeholder="Votre prénom" onChange={handleChange} />
                             </div>
                             <div className="space-y-1">
                                 <Label htmlFor="email">Email</Label>
-                                <Input autoComplete="off" id="email" type="email" value={email} placeholder="Your email" onChange={handleChange} />
+                                <Input autoComplete="off" id="email" type="email" value={email} placeholder="Votre email" onChange={handleChange} />
                             </div>
                             <div className="space-y-1">
-                                <Label htmlFor="password">Password</Label>
-                                <Input id="password" type="password" value={password} placeholder="Enter a password" onChange={handleChange} />
+                                <Label htmlFor="password">Mot de passe</Label>
+                                <Input id="password" type="password" value={password} placeholder="Saisissez un mot de passe" onChange={handleChange} />
                             </div>
                         </CardContent>
                         <CardFooter>
@@ -134,9 +139,9 @@ export default function AuthForm() {
                 <TabsContent value="login">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Log In</CardTitle>
+                            <CardTitle>Se connecter</CardTitle>
                             <CardDescription>
-                                Access your space
+                                Accédez à votre espace
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">
@@ -145,7 +150,7 @@ export default function AuthForm() {
                                 <Input id="email" type="email" placeholder="Your email" />
                             </div>
                             <div className="space-y-1">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">Mot de passe</Label>
                                 <Input id="password" type="password" placeholder="Enter yout password" />
                             </div>
                         </CardContent>
