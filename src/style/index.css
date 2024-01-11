@@ -74,3 +74,7 @@ body::-webkit-scrollbar {
     @apply w-screen h-screen flex flex-col items-center justify-start
 }
 
+.tabs-content-dashboard {
+    @apply w-full border-2 border-border p-6 rounded-lg
+}
+
