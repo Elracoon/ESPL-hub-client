@@ -1,8 +1,11 @@
+import Nav from "@/components/Header/Nav";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
 
 export default function Dashboard() {
 	return (
 		<section className="w-screen h-full p-4">
+			<Nav />
 			<Tabs defaultValue="tab1">
                 <TabsList className="grid grid-cols-3 w-[400px]">
                     <TabsTrigger value="tab1">Projets</TabsTrigger>
