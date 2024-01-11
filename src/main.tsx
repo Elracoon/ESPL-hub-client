@@ -9,6 +9,7 @@ import Auth from "@/pages/Auth";
 import AuthAdmin from "@/pages/AuthAdmin";
 import Profile from "@/pages/Profile";
 import Notifications from "@/pages/Notifications";
+import Project from "@/pages/Project";
 
 import "@/style/index.css";
 import "@/style/layouts.css";
@@ -23,6 +24,7 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
                 <Route path="/auth/admin" element={<AuthAdmin />}></Route>
                 <Route path="/notifcations" element={<Notifications />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/project/:id" element={<Project />}></Route>
             </Routes>
             <Toaster richColors />
         </BrowserRouter>
