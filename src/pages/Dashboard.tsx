@@ -7,10 +7,10 @@ export default function Dashboard() {
 		<section className="w-screen h-full p-4">
 			<Nav />
 			<Tabs defaultValue="tab1">
-                <TabsList className="grid grid-cols-3 w-[400px]">
+                <TabsList className="grid grid-cols-2 w-[400px]">
                     <TabsTrigger value="tab1">Projets</TabsTrigger>
                     <TabsTrigger value="tab2">En cours</TabsTrigger>
-                    <TabsTrigger value="tab2">Terminés</TabsTrigger>
+                    {/* <TabsTrigger value="tab2">Terminés</TabsTrigger> */}
                 </TabsList>
 				<TabsContent value="tab1" className="tabs-content-dashboard">
 					<h1>test</h1>
