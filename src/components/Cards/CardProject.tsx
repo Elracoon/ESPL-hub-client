@@ -2,14 +2,15 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 
 type CardProjectProps = {
     title: string;
     date: string;
     description: string;
-    skills: string;
-    id: string;
+    skills: string[];
+    id?: string;
 }
 
 const CardProject : FC<CardProjectProps> = ( props ) => {
@@ -23,15 +24,17 @@ const CardProject : FC<CardProjectProps> = ( props ) => {
     };
 
     return (
-        <div className="w-[31%] bg-white rounded-sm p-2">
-            <h1 className="text-white bg-black rounded-sm p-2 text-3xl">{ props.title }</h1>
-            <div className="flex justify-between my-2 items-center">
-                <p className="text-black text-xs">Créé le : { props.date }</p>
-                <p className="text-white bg-black rounded-sm p-1 text-xs">{ props.skills }</p>
-            </div>
-            <p className="text-black mb-3 text-sm">{ lenghtDescription(props) }</p>
+        <div className="w-[31%] h-auto bg-background border-2 rounded-lg p-6 text-xl text-white font-normal">
+            <p className="flex-row-center-start gap-2">
+                {props.skills.map((tag, index) => (
+                            <Badge key={index} variant="outline" className="text-sm">{ tag }</Badge>
+                        ))}
+            </p>
+            <h3 className="text-5xl pb-4 pt-2 font-semibold">{ props.title }</h3>
+            <p className="text-muted-foreground font-light text-lg">Créé le : { props.date }</p>
+            <p className="pt-6 pb-10 text-xl">{ lenghtDescription(props) }</p>
             <Link to={`/project/${props.id}`}>
-                <Button>En savoir plus</Button>
+                <Button size={"lg"}>En savoir plus</Button>
             </Link>
         </div>
     )

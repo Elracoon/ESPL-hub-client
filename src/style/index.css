@@ -75,6 +75,6 @@ body::-webkit-scrollbar {
 }
 
 .tabs-content-dashboard {
-    @apply w-full border-2 border-border p-6 rounded-lg
+    @apply w-full border-2 border-border p-6 rounded-xl
 }
 
