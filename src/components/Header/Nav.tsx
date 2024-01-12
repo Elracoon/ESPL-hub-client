@@ -39,7 +39,7 @@ export default function Nav() {
     return (
         <nav className="w-full h-32 py-4 px-6 flex-row-center-between">
             <div className="flex-row-center-center">
-                <p className="text-5xl font-semibold">
+                <p className="text-3xl font-semibold">
                     <Link to={"/"}>ESPL Hub</Link>
                 </p>
             </div>

@@ -16,9 +16,10 @@ export default function Project() {
                             <FontAwesomeIcon icon={faArrowLeft} className="text-xl" />
                         </Link>
                     </div>
-                    <div className="my-10 flex-col-start-start gap-4">
+                    <div className="my-10 flex-col-start-start gap-5">
                         <h1 className="text-6xl font-semibold">Projet</h1>
-                        <p className="text-xl text-muted-foreground font-normal max-w-10xl">
+                        <p className="text-muted-foreground font-light text-base">Projet crée par <span className="text-white hover:underline hover:cursor-pointer">Arthur</span> le <span className="text-white">20/05/2024</span></p>
+                        <p className="text-xl font-normal max-w-10xl">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestiae, libero eum perferendis odio nobis vero nemo consectetur maiores suscipit amet nesciunt veniam repellendus natus exercitationem eaque atque fuga necessitatibus. Molestiae fuga necessitatibus commodi quia. Asperiores sed corporis deleniti nihil hic maiores quod nemo at adipisci aperiam, laudantium ipsa tenetur?
                         </p>
                     </div>
@@ -39,10 +40,6 @@ export default function Project() {
                             <UserMember name="Broudoux" firstName="Arthur" avatar="A" />
                             <UserMember name="Broudoux" firstName="Arthur" avatar="A"  />
                         </div>
-                    </div>
-                    <div className="flex-row-center-between">
-                        <div className="w-2/4 h-auto"></div>
-                        <div className="w-2/4 h-auto"></div>
                     </div>
                 </div>
             </div>
