@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { TabsContent } from "@/components/ui/tabs";
+import { TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 
 type NavLinkProps = {
@@ -10,9 +10,9 @@ type NavLinkProps = {
 
 const NavLink : FC<NavLinkProps> = ( props : NavLinkProps ) => {
     return (
-        <TabsContent value={ props.value } className="tabs-content-dashboard">
+        <TabsTrigger value={ props.value }>
             <p>{ props.title }</p>
-        </TabsContent>
+        </TabsTrigger>
     )
 }
 

@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea"
 
 
 export default function Nav() {
@@ -34,25 +35,29 @@ export default function Nav() {
                     <DialogTrigger asChild>
                         <Button>Create +</Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
+                    <DialogContent className="sm:max-w-[450px]">
                         <DialogHeader>
                             <DialogTitle>Créez un projet</DialogTitle>
                             <DialogDescription>
                                 Décrivez votre projet
                             </DialogDescription>
                         </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
+                        <div className="grid gap-5 py-4">
+                            <div className="grid grid-cols-4 items-center gap-5">
                                 <Label htmlFor="nameProject" className="text-right">Titre</Label>
-                                <Input id="nameProject" placeholder="Titre du projet" className="col-span-3" />
+                                <Input id="nameProject" placeholder="Titre" className="col-span-3" />
                             </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
+                            <div className="grid grid-cols-4 items-center gap-5">
                                 <Label htmlFor="goalsProject" className="text-right">Objectifs</Label>
-                                <Input id="goalsProject" placeholder="Objectifs du projet" className="col-span-3" />
+                                <Input id="goalsProject" placeholder="Objectifs" className="col-span-3" />
                             </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
+                            <div className="grid grid-cols-4 items-center gap-5">
                                 <Label htmlFor="skillsProject" className="text-right">Compétences</Label>
                                 <Input id="skillsProject" placeholder="Compétences recherchées" className="col-span-3" />
+                            </div>
+                            <div className="grid grid-cols-4 items-start gap-5">
+                                <Label htmlFor="skillsProject" className="text-right">Description</Label>
+                                <Textarea name="description" className="col-span-3" placeholder="Description" />
                             </div>
                         </div>
                         <DialogFooter>

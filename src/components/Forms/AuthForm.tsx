@@ -97,60 +97,60 @@ export default function AuthForm() {
                     <TabsTrigger value="signin">Créer un compte</TabsTrigger>
                     <TabsTrigger value="login">Se connecter</TabsTrigger>
                 </TabsList>
-                    <TabsContent value="signin">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>S'inscrire</CardTitle>
-                                <CardDescription>
-                                    Nouveau ici ? Créez un compte
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-2">
-                                <div className="space-y-1">
-                                    <Label htmlFor="name">Nom</Label>
-                                    <Input autoComplete="off" id="name" type="text" value={name} placeholder="Votre nom" onChange={handleChange} />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="firstName">Prénom</Label>
-                                    <Input autoComplete="off" id="firstName" type="text" value={firstName} placeholder="Votre prénom" onChange={handleChange} />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input autoComplete="off" id="email" type="email" value={email} placeholder="Votre email" onChange={handleChange} />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="password">Mot de passe</Label>
-                                    <Input id="password" type="password" value={password} placeholder="Saisissez un mot de passe" onChange={handleChange} />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="password">Statut</Label>
-                                    <Select>
-                                        <SelectTrigger className="w-[180px]">
-                                            <SelectValue placeholder="Votre statut" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectGroup>
-                                                <SelectLabel>Statut</SelectLabel>
-                                                <SelectItem value="student">Etudiant</SelectItem>
-                                                <SelectItem value="teacher">Intervenant</SelectItem>
-                                                <SelectItem value="company">Entreprise</SelectItem>
-                                                <SelectItem value="association">Association</SelectItem>
-                                                <SelectItem value="other">Autre</SelectItem>
-                                            </SelectGroup>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </CardContent>
-                            <CardFooter>
-                                <Button disabled={isLoading} onClick={createUser}>
-                                    {isLoading && (
-                                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                                    )}
-                                    S'inscrire
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                    </TabsContent>
+                <TabsContent value="signin">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>S'inscrire</CardTitle>
+                            <CardDescription>
+                                Nouveau ici ? Créez un compte
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                                <Label htmlFor="name">Nom</Label>
+                                <Input autoComplete="off" id="name" type="text" value={name} placeholder="Votre nom" onChange={handleChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="firstName">Prénom</Label>
+                                <Input autoComplete="off" id="firstName" type="text" value={firstName} placeholder="Votre prénom" onChange={handleChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="email">Email</Label>
+                                <Input autoComplete="off" id="email" type="email" value={email} placeholder="Votre email" onChange={handleChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="password">Mot de passe</Label>
+                                <Input id="password" type="password" value={password} placeholder="Saisissez un mot de passe" onChange={handleChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="password">Statut</Label>
+                                <Select>
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="Votre statut" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectLabel>Statut</SelectLabel>
+                                            <SelectItem value="student">Etudiant</SelectItem>
+                                            <SelectItem value="teacher">Intervenant</SelectItem>
+                                            <SelectItem value="company">Entreprise</SelectItem>
+                                            <SelectItem value="association">Association</SelectItem>
+                                            <SelectItem value="other">Autre</SelectItem>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button disabled={isLoading} onClick={createUser}>
+                                {isLoading && (
+                                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                                )}
+                                S'inscrire
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </TabsContent>
                 <form onSubmit={login}>
                     <TabsContent value="login">
                         <Card>
