@@ -16,9 +16,8 @@ import { Icons } from "@/components/ui/icons";
 
 export default function AuthForm() {
 
-    const { token, username, signIn, setUsername } = useStore();
+    const { token, firstName, signIn, setFirstName } = useStore();
     const [name, setName] = useState('');
-    const [firstName, setfirstName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -63,7 +62,7 @@ export default function AuthForm() {
 
                 if (response.ok) {
                     navigate("/");
-                    setUsername(name);
+                    setFirstName(name);
                     console.log(name, email, password)
                     signIn();
                 } else {

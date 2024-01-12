@@ -2,7 +2,8 @@ import { create } from 'zustand';
 
 
 const savedToken = localStorage.getItem('token');
-const username = localStorage.getItem('username');
+// const firstName = localStorage.getItem('firstName');
+const firstName = localStorage.getItem('firstName');
 
 interface Store {
     token: boolean;
@@ -10,14 +11,14 @@ interface Store {
     isUpdating: boolean;
     isLoading: boolean;
     isCreating: boolean;
-    username: string;
+    firstName: string;
     signIn: () => void;
     signOut: () => void;
     setIsDeleting: (value: boolean) => void;
     setIsUpdating: (value: boolean) => void;
     setIsLoading: (value: boolean) => void;
     setIsCreating: (value: boolean) => void;
-    setUsername: (value: string) => void;
+    setFirstName: (value: string) => void;
 };
 
 const useStore = create<Store>((set) => ({
@@ -26,7 +27,7 @@ const useStore = create<Store>((set) => ({
     isUpdating: false,
     isLoading: false,
     isCreating: false,
-    username: username ? JSON.parse(username) : '',
+    firstName: firstName ? JSON.parse(firstName) : '',
     signIn: () => {
         set({ token: true });
         localStorage.setItem('token', JSON.stringify(true));
@@ -34,15 +35,15 @@ const useStore = create<Store>((set) => ({
     signOut: () => {
         set({ token: false });
         localStorage.removeItem('token');
-        localStorage.removeItem('username');
+        localStorage.removeItem('firstName');
     },
     setIsDeleting: (value: boolean) => set({ isDeleting: value }),
     setIsUpdating: (value: boolean) => set({ isUpdating: value }),
     setIsLoading: (value: boolean) => set({ isLoading: value }),
     setIsCreating: (value: boolean) => set({ isCreating: value }),
-    setUsername: (value: string) => {
-        set({ username: value});
-        localStorage.setItem('username', JSON.stringify(value));
+    setFirstName: (value: string) => {
+        set({ firstName: value});
+        localStorage.setItem('firstName', JSON.stringify(value));
     },
 }));
 
