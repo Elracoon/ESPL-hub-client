@@ -44,10 +44,10 @@ export default function Nav() {
                     <Link to={"/"}>ESPL Hub</Link>
                 </h1>
             </div>
-            <div className="flex-row-center-between gap-4">
+            <div className="flex-row-center-between gap-8">
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button>Create +</Button>
+                        <Button size={"lg"}>Create +</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[450px]">
                         <DialogHeader>
@@ -71,16 +71,18 @@ export default function Nav() {
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
-                <Link to={"/notifications"}>
-                    <div className="flex-col-center-center rounded-full h-10 w-10">
-                        <Bell />
-                    </div>
-                </Link>
-                <Link to={"/profile"}>
-                    <Avatar>
-                        <AvatarFallback>{ firstLetterFirstName }</AvatarFallback>
-                    </Avatar>
-                </Link>
+                <div className="flex-row-center-center gap-4">
+                    <Link to={"/notifications"}>
+                        <div className="flex-col-center-center rounded-lg w-14 h-14 hover:bg-secondary/80">
+                            <Bell />
+                        </div>
+                    </Link>
+                    <Link to={"/profile"}>
+                        <Avatar>
+                            <AvatarFallback>{ firstLetterFirstName }</AvatarFallback>
+                        </Avatar>
+                    </Link>
+                </div>
             </div>
         </nav>
     )
