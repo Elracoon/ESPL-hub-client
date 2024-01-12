@@ -40,9 +40,9 @@ export default function Nav() {
     return (
         <nav className="w-full h-32 py-4 px-6 flex-row-center-between">
             <div className="flex-row-center-center">
-                <h1 className="text-5xl font-semibold">
+                <p className="text-5xl font-semibold">
                     <Link to={"/"}>ESPL Hub</Link>
-                </h1>
+                </p>
             </div>
             <div className="flex-row-center-between gap-8">
                 <Dialog>
@@ -71,7 +71,7 @@ export default function Nav() {
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
-                <div className="flex-row-center-center gap-4">
+                <div className="flex-row-center-center gap-3">
                     <Link to={"/notifications"}>
                         <div className="flex-col-center-center rounded-lg w-14 h-14 hover:bg-secondary/80">
                             <Bell />
@@ -79,7 +79,8 @@ export default function Nav() {
                     </Link>
                     <Link to={"/profile"}>
                         <Avatar>
-                            <AvatarFallback>{ firstLetterFirstName }</AvatarFallback>
+                            {/* <AvatarFallback>{ firstLetterFirstName }</AvatarFallback> */}
+                            <AvatarFallback>A</AvatarFallback>
                         </Avatar>
                     </Link>
                 </div>
