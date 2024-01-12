@@ -9,7 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 export default function Nav() {
@@ -22,6 +23,19 @@ export default function Nav() {
             setFirstLetterFirstName(firstName.charAt(0).toUpperCase());
         };
     }, [firstName]);
+
+    const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+    const handleSkillsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const skill = event.target.value;
+        setSelectedSkills((prevSkills) => {
+            if (prevSkills.includes(skill)) {
+                return prevSkills.filter((s) => s !== skill);
+            } else {
+                return [...prevSkills, skill];
+            };
+        });
+    };
 
     return (
         <nav className="w-full h-32 py-4 px-6 flex-row-center-between">
@@ -46,14 +60,6 @@ export default function Nav() {
                             <div className="grid grid-cols-4 items-center gap-5">
                                 <Label htmlFor="nameProject" className="text-right">Titre</Label>
                                 <Input id="nameProject" placeholder="Titre" className="col-span-3" />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-5">
-                                <Label htmlFor="goalsProject" className="text-right">Objectifs</Label>
-                                <Input id="goalsProject" placeholder="Objectifs" className="col-span-3" />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-5">
-                                <Label htmlFor="skillsProject" className="text-right">Compétences</Label>
-                                <Input id="skillsProject" placeholder="Compétences recherchées" className="col-span-3" />
                             </div>
                             <div className="grid grid-cols-4 items-start gap-5">
                                 <Label htmlFor="skillsProject" className="text-right">Description</Label>
