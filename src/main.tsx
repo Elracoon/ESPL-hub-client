@@ -33,12 +33,12 @@ const AppRoutes = () => {
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             {shouldShowNav && <Nav />}
             <Routes>
-                    <Route path="/" element={<Dashboard />}></Route>
-                    <Route path="/auth" element={<Auth />}></Route>
-                    <Route path="/auth/admin" element={<AuthAdmin />}></Route>
-                    <Route path="/notifcations" element={<Notifications />}></Route>
-                    <Route path="/profile" element={<Profile />}></Route>
-                    <Route path="/project/:id" element={<Project />}></Route>
+                <Route path="/" element={<Dashboard />}></Route>
+                <Route path="/auth" element={<Auth />}></Route>
+                <Route path="/auth/admin" element={<AuthAdmin />}></Route>
+                <Route path="/notifcations" element={<Notifications />}></Route>
+                <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/project/:id" element={<Project />}></Route>
             </Routes>
             <Toaster richColors />
         </ThemeProvider>
