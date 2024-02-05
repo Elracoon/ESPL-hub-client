@@ -3,11 +3,6 @@ import CardProject from "@/components/Cards/CardProject";
 import { TabsContent } from "@/components/ui/tabs";
 
 export default function TabsMain() {
-  // const handleTest = () => {
-  //   try {
-  //     const response = await fetch(`${process.env.REACT_APP_BASE_URL}`);
-  //   }
-  // };
   return (
     <TabsContent value="projets" className="tabs-content-dashboard">
       <div className="w-full h-auto pt-2 pb-10 text-2xl flex-col-start-start gap-4 font-semibold">

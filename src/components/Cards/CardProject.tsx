@@ -23,7 +23,10 @@ const CardProject: FC<CardProjectProps> = (props) => {
   };
 
   return (
-    <div className="w-[31%] h-auto bg-background border-2 rounded-lg p-6 text-xl text-white font-medium">
+    <Link
+      className="w-[31%] h-auto bg-background border-2 rounded-lg p-6 text-xl text-white font-medium"
+      to={`/project/${props.id}`}
+    >
       <p className="flex-row-center-start gap-2">
         {props.skills.map((tag, index) => (
           <Badge key={index} variant="outline" className="text-sm">
@@ -43,7 +46,7 @@ const CardProject: FC<CardProjectProps> = (props) => {
       <Link to={`/project/${props.id}`}>
         <Button size={"lg"}>En savoir plus</Button>
       </Link>
-    </div>
+    </Link>
   );
 };
 
