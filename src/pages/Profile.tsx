@@ -11,9 +11,12 @@ import {
 import { Button } from  '@/components/ui/button'
 import  { ModeToggle } from "@/components/ui/mode-toggle";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {useState} from "react";
 
 
 export default function Profile() {
+
     const inputStyle = 'w-1/4 mb-2.5 mt-2.5'
     const buttonStyle = 'w-4/5 mb-2.5 px-10'
     return (
@@ -36,7 +39,7 @@ export default function Profile() {
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectItem value="dev">Développement Web</SelectItem>
+                            <SelectItem value="dev" >Développement Web</SelectItem>
                             <SelectItem value="marketing">Marketing</SelectItem>
                             <SelectItem value="communication">Communication</SelectItem>
                             <SelectItem value="ux-ui">UX-UI</SelectItem>
@@ -44,6 +47,13 @@ export default function Profile() {
                         </SelectGroup>
                     </SelectContent>
                 </Select>
+                <div className="flex">
+                    <Badge className={"bg-blue-500 mx-2"}>Développement Web</Badge>
+                    <Badge className={"bg-green-500 mx-2"}>Marketing</Badge>
+                    <Badge className={"bg-red-500 mx-2"}>Communication</Badge>
+                    <Badge className={"bg-yellow-500 mx-2 "}>UX-UI</Badge>
+                    <Badge className={"bg-purple-500 mx-2"}>Création Numérique</Badge>
+                </div>
                 <div className="mb-2.5">
                     <Label htmlFor="theme">Thème :</Label> <br/>
                     <ModeToggle></ModeToggle> <br/>
