@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { MoreHorizontal } from "lucide-react";
+
+import useStore from "@/lib/store";
+
+import RedirectPageAuth from "@/pages/RedirectPageAuth";
+
 import {
   Table,
   TableHeader,
@@ -14,7 +20,6 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
 
 export default function Notifications() {
   type notifs = {
@@ -54,6 +59,12 @@ export default function Notifications() {
         'Félicitations, vous avez été accepté pour participer au projet "Développement d\'une application mobile avec Kotlin"',
     },
   ];
+
+  const { token } = useStore();
+
+  if (!token) {
+    return <RedirectPageAuth />;
+  }
 
   const [read, setRead] = useState<{ [id: number]: boolean }>(() => {
     const initialReadStatus: { [id: number]: boolean } = {};
