@@ -7,7 +7,7 @@ import { MoreHorizontal } from "lucide-react"
 
 
 export default function Notifications() {
-    const [position, setPosition] = React.useState("no-read")
+    const [position, setPosition] = React.useState("not-read")
 
     type notifs = {
         date: string,
@@ -76,7 +76,7 @@ export default function Notifications() {
                                         <DropdownMenuTrigger><Button className="flex items-center" size="sm" variant="ghost"><MoreHorizontal /></Button></DropdownMenuTrigger>
                                         <DropdownMenuContent>
                                             <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-                                                <DropdownMenuRadioItem value="no-read">Marquer comme non lu</DropdownMenuRadioItem>
+                                                <DropdownMenuRadioItem value="not-read">Marquer comme non lu</DropdownMenuRadioItem>
                                                 <DropdownMenuRadioItem value="read">Marquer comme lu</DropdownMenuRadioItem>
                                             </DropdownMenuRadioGroup>
                                             <DropdownMenuSeparator />
