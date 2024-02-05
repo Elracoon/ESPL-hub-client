@@ -2,19 +2,17 @@ import { FC } from "react";
 
 import { TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
-
 type NavLinkProps = {
-    value: string;
-    title: string;
-}
+  value: string;
+  title: string;
+};
 
-const NavLink : FC<NavLinkProps> = ( props : NavLinkProps ) => {
-    return (
-        <TabsTrigger value={ props.value }>
-            <p>{ props.title }</p>
-        </TabsTrigger>
-    )
-}
-
+const NavLink: FC<NavLinkProps> = (props: NavLinkProps) => {
+  return (
+    <TabsTrigger value={props.value}>
+      <p>{props.title}</p>
+    </TabsTrigger>
+  );
+};
 
 export default NavLink;

@@ -1,4 +1,4 @@
-const loading = (ms : number) => new Promise((resolve) => setTimeout(resolve, ms));
-
+const loading = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 export default loading;
