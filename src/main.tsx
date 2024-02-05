@@ -1,6 +1,4 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
-import ReactDOM from "react-dom/client";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -35,7 +33,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Dashboard />}></Route>
         <Route path="/auth" element={<Auth />}></Route>
         <Route path="/auth/admin" element={<AuthAdmin />}></Route>
-        <Route path="/notifcations" element={<Notifications />}></Route>
+        <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/project/:id" element={<Project />}></Route>
       </Routes>
