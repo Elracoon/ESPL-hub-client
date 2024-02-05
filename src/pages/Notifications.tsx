@@ -92,66 +92,64 @@ export default function Notifications() {
   };
 
   return (
-    <div>
+    <section className="w-screen h-full p-4">
       <Nav />
-      <section className="w-screen h-full p-4">
-        <div className="tabs-content-dashboard">
-          <h1 className="text-6xl font-semibold mb-7">Projet</h1>
-          <Table>
-            <TableHeader className="w-full">
-              <TableRow className="text-stone-500 font-bold">
-                <TableCell className="w-1/6">
-                  <p>Date :</p>
+      <div className="tabs-content-dashboard">
+        <h1 className="text-6xl font-semibold mb-7">Projet</h1>
+        <Table>
+          <TableHeader className="w-full">
+            <TableRow className="text-stone-500 font-bold">
+              <TableCell className="w-1/6">
+                <p>Date :</p>
+              </TableCell>
+              <TableCell className="w-1/5">
+                <p>Type :</p>
+              </TableCell>
+              <TableCell className="w-2/5">
+                <p>Contenu :</p>
+              </TableCell>
+              <TableCell className="w-1/6" />
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {notifs.map(({ date, type, contenu, id }: notifs) => (
+              <TableRow>
+                <TableCell>
+                  <p className="text-xl" key={id}>
+                    {date}
+                  </p>
                 </TableCell>
-                <TableCell className="w-1/5">
-                  <p>Type :</p>
+                <TableCell>
+                  <p key={id} className="text-primary font-semibold text-xl">
+                    {type}
+                  </p>
                 </TableCell>
-                <TableCell className="w-2/5">
-                  <p>Contenu :</p>
+                <TableCell>
+                  <p className="text-xl" key={id}>
+                    {contenu}
+                  </p>
                 </TableCell>
-                <TableCell className="w-1/6" />
+                <TableCell className="flex justify-center items-center">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <Button size="sm" variant="ghost">
+                        <MoreHorizontal />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      {getButton(id)}
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="text-primary font-bold">
+                        Supprimer
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {notifs.map(({ date, type, contenu, id }: notifs) => (
-                <TableRow>
-                  <TableCell>
-                    <p className="text-xl" key={id}>
-                      {date}
-                    </p>
-                  </TableCell>
-                  <TableCell>
-                    <p key={id} className="text-primary font-semibold text-xl">
-                      {type}
-                    </p>
-                  </TableCell>
-                  <TableCell>
-                    <p className="text-xl" key={id}>
-                      {contenu}
-                    </p>
-                  </TableCell>
-                  <TableCell className="flex justify-center items-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <Button size="sm" variant="ghost">
-                          <MoreHorizontal />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        {getButton(id)}
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-primary font-bold">
-                          Supprimer
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </section>
-    </div>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </section>
   );
 }
