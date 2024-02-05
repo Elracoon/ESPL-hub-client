@@ -9,7 +9,7 @@ type CardProjectProps = {
   date: string;
   owner?: string;
   description: string;
-  skills?: string[];
+  skills: string[];
   id?: string;
 };
 

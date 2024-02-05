@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { TabsContent, TabsTrigger } from "@/components/ui/tabs";
+import { TabsTrigger } from "@/components/ui/tabs";
 
 type NavLinkProps = {
   value: string;
