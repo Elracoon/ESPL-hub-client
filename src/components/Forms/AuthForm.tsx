@@ -29,8 +29,9 @@ import {
 import { Icons } from "@/components/ui/icons";
 
 export default function AuthForm() {
-  const { token, firstName, signIn, setFirstName } = useStore();
+  const { signIn } = useStore();
   const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -40,6 +41,9 @@ export default function AuthForm() {
     switch (e.target.id) {
       case "name":
         setName(e.target.value);
+        break;
+      case "firstName":
+        setFirstName(e.target.value);
         break;
       case "email":
         setEmail(e.target.value);
@@ -52,51 +56,13 @@ export default function AuthForm() {
     }
   };
 
-  const createUser = async () => {
-    setIsLoading(true);
-    await loading(2000);
-
-    if (name.length <= 1) {
-      toast.error("Choose a username with 2 characters or more");
-    } else if (email.length <= 1) {
-      toast.error("Choose an email with 2 characters or more");
-    } else if (password.length <= 1) {
-      toast.error("Choose a password with 6 characters or more");
-    } else {
-      try {
-        const response = await fetch(`api/users`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, password }),
-        });
-
-        if (response.ok) {
-          navigate("/");
-          setFirstName(name);
-          console.log(name, email, password);
-          signIn();
-        } else {
-          toast.error("Failed during registration");
-          throw new Error("Failed during registration");
-        }
-      } catch (error: any) {
-        toast.error("Error during registration", error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    setIsLoading(false);
-  };
-
-  async function login(event: React.SyntheticEvent) {
+  async function createUser(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
 
     setTimeout(() => {
       setIsLoading(false);
+      signIn();
       navigate("/");
     }, 2000);
   }
@@ -187,38 +153,36 @@ export default function AuthForm() {
             </CardFooter>
           </Card>
         </TabsContent>
-        <form onSubmit={login}>
-          <TabsContent value="login">
-            <Card>
-              <CardHeader>
-                <CardTitle>Se connecter</CardTitle>
-                <CardDescription>Accédez à votre espace</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="Your email" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="password">Mot de passe</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter yout password"
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button disabled={isLoading}>
-                  {isLoading && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Se connecter
-                </Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
-        </form>
+        <TabsContent value="login">
+          <Card>
+            <CardHeader>
+              <CardTitle>Se connecter</CardTitle>
+              <CardDescription>Accédez à votre espace</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="space-y-1">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" placeholder="Your email" />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="password">Mot de passe</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter yout password"
+                />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button disabled={isLoading}>
+                {isLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Se connecter
+              </Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
       </Tabs>
     </section>
   );

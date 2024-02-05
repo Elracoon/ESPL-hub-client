@@ -2,11 +2,21 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
+import useStore from "@/lib/store";
+
+import RedirectPageAuth from "@/pages/RedirectPageAuth";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import UserMember from "@/components/Users/UserMember";
 
 export default function Project() {
+  const { token } = useStore();
+
+  if (!token) {
+    return <RedirectPageAuth />;
+  }
+
   return (
     <section className="w-screen h-full p-4">
       <div className="tabs-content-dashboard">

@@ -1,8 +1,7 @@
 import { create } from "zustand";
 
-const savedToken = localStorage.getItem("token");
-// const firstName = localStorage.getItem('firstName');
-const firstName = localStorage.getItem("firstName");
+const savedToken = sessionStorage.getItem("token");
+const firstName = sessionStorage.getItem("firstName");
 
 interface Store {
   token: boolean;
@@ -29,12 +28,12 @@ const useStore = create<Store>((set) => ({
   firstName: firstName ? JSON.parse(firstName) : "",
   signIn: () => {
     set({ token: true });
-    localStorage.setItem("token", JSON.stringify(true));
+    sessionStorage.setItem("token", JSON.stringify(true));
   },
   signOut: () => {
     set({ token: false });
-    localStorage.removeItem("token");
-    localStorage.removeItem("firstName");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("firstName");
   },
   setIsDeleting: (value: boolean) => set({ isDeleting: value }),
   setIsUpdating: (value: boolean) => set({ isUpdating: value }),
@@ -42,7 +41,7 @@ const useStore = create<Store>((set) => ({
   setIsCreating: (value: boolean) => set({ isCreating: value }),
   setFirstName: (value: string) => {
     set({ firstName: value });
-    localStorage.setItem("firstName", JSON.stringify(value));
+    sessionStorage.setItem("firstName", JSON.stringify(value));
   },
 }));
 
