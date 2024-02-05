@@ -65,9 +65,8 @@ export default function Notifications() {
     };
     
     return (
-        <div>
+        <section className="w-screen h-full p-4">
             <Nav />
-            <section className="w-screen h-full p-4">
                 <div className="tabs-content-dashboard">
                 <h1 className="text-6xl font-semibold mb-7">Projet</h1>
                     <Table>
@@ -112,7 +111,6 @@ export default function Notifications() {
                         </TableBody>
                     </Table>
                 </div>
-            </section>
-        </div>
+        </section>  
     )
 }
