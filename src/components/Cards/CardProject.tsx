@@ -23,7 +23,7 @@ const CardProject : FC<CardProjectProps> = ( props ) => {
     };
 
     return (
-        <div className="w-[31%] bg-white rounded-sm p-2">
+        <div className="w-[91%] bg-white rounded-sm p-2">
             <h1 className="text-white bg-black rounded-sm p-2 text-3xl">{ props.title }</h1>
             <div className="flex justify-between my-2 items-center">
                 <p className="text-black text-xs">Créé le : { props.date }</p>
