@@ -43,7 +43,7 @@ export default function Notifications() {
     return (
         <section className="w-screen h-full p-4">
             <div className="tabs-content-dashboard">
-                <h1 className="uppercase text-white font-bold text-4xl mb-8">notifications</h1>
+            <h1 className="text-6xl font-semibold mb-7">Projet</h1>
                 <Table>
                     <TableHeader className="w-full">
                         <TableRow className="text-stone-500 font-bold">
@@ -66,7 +66,7 @@ export default function Notifications() {
                                     <p key={date}>{date}</p>
                                 </TableCell>
                                 <TableCell>
-                                    <p key={type} className="text-primary">{type}</p>
+                                    <p key={type} className="text-primary font-semibold">{type}</p>
                                 </TableCell>
                                 <TableCell>
                                     <p key={contenu}>{contenu}</p>
