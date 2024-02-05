@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Bell } from "lucide-react";
+import { Bell, Blocks } from "lucide-react";
 
 import useStore from "@/lib/store";
 
@@ -33,7 +33,10 @@ export default function Nav() {
     <nav className="w-full h-32 py-4 px-6 flex-row-center-between">
       <div className="flex-row-center-center">
         <p className="text-3xl font-semibold">
-          <Link to={"/"}>ESPL Hub</Link>
+          <Link to={"/"} className="flex-row-center-start gap-2">
+            ESPL Hub
+            <Blocks className="text-primary" />
+          </Link>
         </p>
       </div>
       <div className="flex-row-center-between gap-8">
