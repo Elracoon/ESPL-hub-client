@@ -7,9 +7,9 @@ import { Badge } from "@/components/ui/badge";
 type CardProjectProps = {
   title: string;
   date: string;
-  owner: string;
+  owner?: string;
   description: string;
-  skills: string[];
+  skills?: string[];
   id?: string;
 };
 
