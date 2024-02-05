@@ -77,7 +77,13 @@ export default function Project() {
             </h2>
             <div className="w-auto h-auto flex-row-start-start gap-4">
               <Button size={"lg"}>Postuler</Button>
-              <Button size={"lg"} variant={"outline"}>
+              <Button
+                size={"lg"}
+                variant={"outline"}
+                onClick={() =>
+                  (window.location.href = "mailto:arthur.broudoux@gmail.com")
+                }
+              >
                 Contacter le créateur
               </Button>
             </div>
