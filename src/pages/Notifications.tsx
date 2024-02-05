@@ -56,24 +56,24 @@ export default function Notifications() {
                             <TableCell className="w-2/5">
                                 <p>Contenu :</p>
                             </TableCell>
-                            <TableCell className="w-1/5"/>
+                            <TableCell className="w-1/6"/>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {notifs.map(({date, type, contenu}: notifs) => (
                             <TableRow>
                                 <TableCell>
-                                    <p key={date}>{date}</p>
+                                    <p className="text-xl" key={date}>{date}</p>
                                 </TableCell>
                                 <TableCell>
-                                    <p key={type} className="text-primary font-semibold">{type}</p>
+                                    <p key={type} className="text-primary font-semibold text-xl">{type}</p>
                                 </TableCell>
                                 <TableCell>
-                                    <p key={contenu}>{contenu}</p>
+                                    <p className="text-xl" key={contenu}>{contenu}</p>
                                 </TableCell>
-                                <TableCell className="flex justify-center">
+                                <TableCell className="flex justify-center items-center">
                                     <DropdownMenu>
-                                        <DropdownMenuTrigger><Button className="flex items-center" size="sm" variant="ghost"><MoreHorizontal /></Button></DropdownMenuTrigger>
+                                        <DropdownMenuTrigger><Button size="sm" variant="ghost"><MoreHorizontal /></Button></DropdownMenuTrigger>
                                         <DropdownMenuContent>
                                             <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
                                                 <DropdownMenuRadioItem value="not-read">Marquer comme non lu</DropdownMenuRadioItem>
