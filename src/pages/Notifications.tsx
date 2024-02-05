@@ -3,6 +3,7 @@ import {Table, TableHeader, TableBody, TableRow, TableCell} from "@/components/u
 import {DropdownMenu, DropdownMenuContent,DropdownMenuItem,DropdownMenuTrigger, DropdownMenuSeparator} from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
+import Nav from "@/components/Header/Nav"
 
 
 export default function Notifications() {
@@ -64,51 +65,54 @@ export default function Notifications() {
     };
     
     return (
-        <section className="w-screen h-full p-4">
-            <div className="tabs-content-dashboard">
-            <h1 className="text-6xl font-semibold mb-7">Projet</h1>
-                <Table>
-                    <TableHeader className="w-full">
-                        <TableRow className="text-stone-500 font-bold">
-                            <TableCell className="w-1/6">
-                                <p>Date :</p>
-                            </TableCell>
-                            <TableCell className="w-1/5">
-                                <p>Type :</p>
-                            </TableCell>
-                            <TableCell className="w-2/5">
-                                <p>Contenu :</p>
-                            </TableCell>
-                            <TableCell className="w-1/6"/>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {notifs.map(({date, type, contenu, id}: notifs) => (
-                            <TableRow>
-                                <TableCell>
-                                    <p className="text-xl" key={id}>{date}</p>
+        <div>
+            <Nav />
+            <section className="w-screen h-full p-4">
+                <div className="tabs-content-dashboard">
+                <h1 className="text-6xl font-semibold mb-7">Projet</h1>
+                    <Table>
+                        <TableHeader className="w-full">
+                            <TableRow className="text-stone-500 font-bold">
+                                <TableCell className="w-1/6">
+                                    <p>Date :</p>
                                 </TableCell>
-                                <TableCell>
-                                    <p key={id} className="text-primary font-semibold text-xl">{type}</p>
+                                <TableCell className="w-1/5">
+                                    <p>Type :</p>
                                 </TableCell>
-                                <TableCell>
-                                    <p className="text-xl" key={id}>{contenu}</p>
+                                <TableCell className="w-2/5">
+                                    <p>Contenu :</p>
                                 </TableCell>
-                                <TableCell className="flex justify-center items-center">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger><Button size="sm" variant="ghost"><MoreHorizontal /></Button></DropdownMenuTrigger>
-                                        <DropdownMenuContent>
-                                            {getButton(id)}
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem className="text-primary font-bold">Supprimer</DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
+                                <TableCell className="w-1/6"/>
                             </TableRow>
-                        ))} 
-                    </TableBody>
-                </Table>
-            </div>
-		</section>
+                        </TableHeader>
+                        <TableBody>
+                            {notifs.map(({date, type, contenu, id}: notifs) => (
+                                <TableRow>
+                                    <TableCell>
+                                        <p className="text-xl" key={id}>{date}</p>
+                                    </TableCell>
+                                    <TableCell>
+                                        <p key={id} className="text-primary font-semibold text-xl">{type}</p>
+                                    </TableCell>
+                                    <TableCell>
+                                        <p className="text-xl" key={id}>{contenu}</p>
+                                    </TableCell>
+                                    <TableCell className="flex justify-center items-center">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger><Button size="sm" variant="ghost"><MoreHorizontal /></Button></DropdownMenuTrigger>
+                                            <DropdownMenuContent>
+                                                {getButton(id)}
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuItem className="text-primary font-bold">Supprimer</DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
+                                </TableRow>
+                            ))} 
+                        </TableBody>
+                    </Table>
+                </div>
+            </section>
+        </div>
     )
 }
