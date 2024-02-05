@@ -23,19 +23,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {/*<Select>*/}
-        {/*    <SelectTrigger className={inputStyle}>*/}
-        {/*        <SelectValue placeholder="Choisir le thème"/>*/}
-        {/*    </SelectTrigger>*/}
-        {/*    <SelectContent>*/}
-        {/*        <SelectGroup>*/}
-        {/*            <SelectItem value="light">Light</SelectItem>*/}
-        {/*            <SelectItem value="dark">Dark</SelectItem>*/}
-        {/*            <SelectItem value="system">System</SelectItem>*/}
-        {/*        </SelectGroup>*/}
-        {/*    </SelectContent>*/}
-        {/*</Select>*/}
-        <Button variant="outline" size="profile">
+        <Button variant="outline" size="default">
           <span className=" rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0">
             {" "}
             Light{" "}
