@@ -1,30 +1,11 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import {Table, TableHeader, TableBody, TableRow, TableCell} from "@/components/ui/table"
-import {DropdownMenu, DropdownMenuContent,DropdownMenuItem, DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,DropdownMenuTrigger, DropdownMenuSeparator} from "@/components/ui/dropdown-menu"
+import {DropdownMenu, DropdownMenuContent,DropdownMenuItem,DropdownMenuTrigger, DropdownMenuSeparator} from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 
 
 export default function Notifications() {
-    const [read, setRead] = useState<{ [id: number]: boolean }>({});
-    let button: JSX.Element;
-
-    const toggleReadStatus = (id: number) => {
-        setRead((prevStatus) => ({
-          ...prevStatus,
-          [id]: !prevStatus[id]
-        }));
-    };
-    
-    const getButton = (id: number) => {
-        return read[id] === false ? (
-          <DropdownMenuItem onClick={() => toggleReadStatus(id)}>Marquer comme lu</DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem onClick={() => toggleReadStatus(id)}>Marquer comme non lu</DropdownMenuItem>
-        );
-    };
-
     type notifs = {
         id: number,
         date: string,
@@ -57,10 +38,31 @@ export default function Notifications() {
             type: "Acceptation de votre candidature",
             contenu: "Félicitations, vous avez été accepté pour participer au projet \"Développement d'une application mobile avec Kotlin\""
         }
-    ]
+    ];
+
+    const [read, setRead] = useState<{ [id: number]: boolean }>(() => {
+        const initialReadStatus: { [id: number]: boolean } = {};
+        notifs.forEach((notif) => {
+          initialReadStatus[notif.id] = false;
+        });
+        return initialReadStatus;
+    });
+
+    const toggleReadStatus = (id: number) => {
+        setRead((prevStatus) => ({
+          ...prevStatus,
+          [id]: !prevStatus[id]
+        }));
+    };
     
-
-
+    const getButton = (id: number) => {
+        return read[id] === false ? (
+            <DropdownMenuItem onClick={() => toggleReadStatus(id)}>Marquer comme lu</DropdownMenuItem>
+        ) : (
+            <DropdownMenuItem onClick={() => toggleReadStatus(id)}>Marquer comme non lu</DropdownMenuItem>
+        );
+    };
+    
     return (
         <section className="w-screen h-full p-4">
             <div className="tabs-content-dashboard">
