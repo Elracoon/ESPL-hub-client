@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Table,
   TableHeader,
@@ -10,8 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
@@ -19,9 +17,8 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
 export default function Notifications() {
-  const [position, setPosition] = React.useState("not-read");
-
   type notifs = {
+    id: number;
     date: string;
     type: string;
     contenu: string;
@@ -29,24 +26,28 @@ export default function Notifications() {
 
   const notifs = [
     {
+      id: 0,
       date: "04/01/2025",
       type: "Acceptation de votre projet",
       contenu:
         "Félicitations, votre nouveau projet \"Développement d'une application mobile avec Kotlin\" a été accepté par l'équipe pédagogique !",
     },
     {
+      id: 1,
       date: "04/02/2025",
       type: "Nouveau feedback sur votre projet",
       contenu:
         'Vous avez un nouveau feddback sur votre projet "Développement d\'une application mobile avec Kotlin"',
     },
     {
+      id: 2,
       date: "04/03/2025",
       type: "Nouveau participant à votre projet",
       contenu:
         'Léa Granier souhaite participer à votre projet "Développement d\'une application mobile avec Kotlin"',
     },
     {
+      id: 3,
       date: "04/04/2025",
       type: "Acceptation de votre candidature",
       contenu:
@@ -54,12 +55,37 @@ export default function Notifications() {
     },
   ];
 
+  const [read, setRead] = useState<{ [id: number]: boolean }>(() => {
+    const initialReadStatus: { [id: number]: boolean } = {};
+    notifs.forEach((notif) => {
+      initialReadStatus[notif.id] = false;
+    });
+    return initialReadStatus;
+  });
+
+  const toggleReadStatus = (id: number) => {
+    setRead((prevStatus) => ({
+      ...prevStatus,
+      [id]: !prevStatus[id],
+    }));
+  };
+
+  const getButton = (id: number) => {
+    return read[id] === false ? (
+      <DropdownMenuItem onClick={() => toggleReadStatus(id)}>
+        Marquer comme lu
+      </DropdownMenuItem>
+    ) : (
+      <DropdownMenuItem onClick={() => toggleReadStatus(id)}>
+        Marquer comme non lu
+      </DropdownMenuItem>
+    );
+  };
+
   return (
     <section className="w-screen h-full p-4">
       <div className="tabs-content-dashboard">
-        <h1 className="uppercase text-white font-bold text-4xl mb-8">
-          notifications
-        </h1>
+        <h1 className="text-6xl font-semibold mb-7">Projet</h1>
         <Table>
           <TableHeader className="w-full">
             <TableRow className="text-stone-500 font-bold">
@@ -72,46 +98,36 @@ export default function Notifications() {
               <TableCell className="w-2/5">
                 <p>Contenu :</p>
               </TableCell>
-              <TableCell className="w-1/5" />
+              <TableCell className="w-1/6" />
             </TableRow>
           </TableHeader>
           <TableBody>
-            {notifs.map(({ date, type, contenu }: notifs) => (
+            {notifs.map(({ date, type, contenu, id }: notifs) => (
               <TableRow>
                 <TableCell>
-                  <p key={date}>{date}</p>
+                  <p className="text-xl" key={id}>
+                    {date}
+                  </p>
                 </TableCell>
                 <TableCell>
-                  <p key={type} className="text-primary">
+                  <p key={id} className="text-primary font-semibold text-xl">
                     {type}
                   </p>
                 </TableCell>
                 <TableCell>
-                  <p key={contenu}>{contenu}</p>
+                  <p className="text-xl" key={id}>
+                    {contenu}
+                  </p>
                 </TableCell>
-                <TableCell className="flex justify-center">
+                <TableCell className="flex justify-center items-center">
                   <DropdownMenu>
                     <DropdownMenuTrigger>
-                      <Button
-                        className="flex items-center"
-                        size="sm"
-                        variant="ghost"
-                      >
+                      <Button size="sm" variant="ghost">
                         <MoreHorizontal />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuRadioGroup
-                        value={position}
-                        onValueChange={setPosition}
-                      >
-                        <DropdownMenuRadioItem value="not-read">
-                          Marquer comme non lu
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="read">
-                          Marquer comme lu
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
+                      {getButton(id)}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-primary font-bold">
                         Supprimer
