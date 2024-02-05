@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {Table, TableHeader, TableBody, TableRow, TableCell} from "@/components/ui/table"
 import {DropdownMenu, DropdownMenuContent,DropdownMenuItem,DropdownMenuTrigger, DropdownMenuSeparator} from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 import Nav from "@/components/Header/Nav"
-
+import useStore from "@/lib/store"
 
 export default function Notifications() {
+
+    const { setHaveNotifs } = useStore()
+
     type notifs = {
         id: number,
         date: string,
@@ -55,7 +58,7 @@ export default function Notifications() {
           [id]: !prevStatus[id]
         }));
     };
-    
+
     const getButton = (id: number) => {
         return read[id] === false ? (
             <DropdownMenuItem onClick={() => toggleReadStatus(id)}>Marquer comme lu</DropdownMenuItem>
@@ -63,6 +66,16 @@ export default function Notifications() {
             <DropdownMenuItem onClick={() => toggleReadStatus(id)}>Marquer comme non lu</DropdownMenuItem>
         );
     };
+    
+    useEffect(() => {
+        const countRead = Object.values(read).filter((status) => status === false).length;
+        if (countRead > 0){
+            setHaveNotifs(true)
+        } else{
+            setHaveNotifs(false)
+        };
+    }, [read, setHaveNotifs]);
+    
     
     return (
         <section className="w-screen h-full p-4">

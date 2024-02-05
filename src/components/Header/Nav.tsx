@@ -16,12 +16,24 @@ export default function Nav() {
 
     const { firstName } = useStore();
     const [firstLetterFirstName, setFirstLetterFirstName] = useState('');
+    const { haveNotifs } = useStore()
 
     useEffect(() => {
         if (firstName && firstName.length > 0) {
             setFirstLetterFirstName(firstName.charAt(0).toUpperCase());
         };
     }, [firstName]);
+
+    const haveUnreadNotifs = () => {
+        return (haveNotifs === true) ? (
+            <div>
+                <Bell />
+                <div className="absolute right-0 bottom-0 h-4 w-4 bg-primary rounded-full"></div>
+            </div>
+        ) : (
+            <Bell />
+        );
+    }
 
     return (
         <nav className="w-full h-32 py-4 px-6 flex-row-center-between">
@@ -66,8 +78,8 @@ export default function Nav() {
                     </DialogContent>
                 </Dialog>
                 <Link to={"/notifications"}>
-                    <div className="flex-col-center-center rounded-full h-10 w-10">
-                        <Bell />
+                    <div className="flex-col-center-center rounded-full h-10 w-10 relative">
+                        {haveUnreadNotifs()}
                     </div>
                 </Link>
                 <Link to={"/profile"}>
