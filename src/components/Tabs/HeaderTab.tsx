@@ -7,7 +7,7 @@ type HeaderTabProps = {
 
 const HeaderTab: FC<HeaderTabProps> = (props: HeaderTabProps) => {
   return (
-    <div className="w-full h-auto pt-2 pb-10 text-xl flex-col-start-start gap-4 font-semibold">
+    <div className="w-full h-auto pt-2 pb-8 px-2 text-xl flex-col-start-start gap-4 font-semibold">
       <h1 className="text-5xl">{props.title}</h1>
       <p className="font-normal text-muted-foreground">{props.description}</p>
     </div>
