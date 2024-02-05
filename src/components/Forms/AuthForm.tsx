@@ -29,7 +29,7 @@ import {
 import { Icons } from "@/components/ui/icons";
 
 export default function AuthForm() {
-  const { signIn } = useStore();
+  const { signIn, setUsername } = useStore();
   const [name, setName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -61,9 +61,10 @@ export default function AuthForm() {
     setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false);
       signIn();
       navigate("/");
+      setIsLoading(false);
+      setUsername(firstName);
     }, 2000);
   }
 

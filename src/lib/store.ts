@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const savedToken = sessionStorage.getItem("token");
-const firstName = sessionStorage.getItem("firstName");
+const username = sessionStorage.getItem("username");
 
 interface Store {
   token: boolean;
@@ -9,14 +9,14 @@ interface Store {
   isUpdating: boolean;
   isLoading: boolean;
   isCreating: boolean;
-  firstName: string;
+  username: string;
   signIn: () => void;
   signOut: () => void;
   setIsDeleting: (value: boolean) => void;
   setIsUpdating: (value: boolean) => void;
   setIsLoading: (value: boolean) => void;
   setIsCreating: (value: boolean) => void;
-  setFirstName: (value: string) => void;
+  setUsername: (value: string) => void;
 }
 
 const useStore = create<Store>((set) => ({
@@ -25,7 +25,7 @@ const useStore = create<Store>((set) => ({
   isUpdating: false,
   isLoading: false,
   isCreating: false,
-  firstName: firstName ? JSON.parse(firstName) : "",
+  username: username ? JSON.parse(username) : "",
   signIn: () => {
     set({ token: true });
     sessionStorage.setItem("token", JSON.stringify(true));
@@ -39,9 +39,9 @@ const useStore = create<Store>((set) => ({
   setIsUpdating: (value: boolean) => set({ isUpdating: value }),
   setIsLoading: (value: boolean) => set({ isLoading: value }),
   setIsCreating: (value: boolean) => set({ isCreating: value }),
-  setFirstName: (value: string) => {
-    set({ firstName: value });
-    sessionStorage.setItem("firstName", JSON.stringify(value));
+  setUsername: (value: string) => {
+    set({ username: value });
+    sessionStorage.setItem("username", JSON.stringify(value));
   },
 }));
 

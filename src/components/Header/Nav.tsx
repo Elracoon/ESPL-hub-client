@@ -20,27 +20,14 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function Nav() {
-  const { firstName } = useStore();
-  const [firstLetterFirstName, setFirstLetterFirstName] = useState("");
+  const { username } = useStore();
+  const [firstLetterUsername, setFirstLetterUsername] = useState("");
 
   useEffect(() => {
-    if (firstName && firstName.length > 0) {
-      setFirstLetterFirstName(firstName.charAt(0).toUpperCase());
+    if (username && username.length > 0) {
+      setFirstLetterUsername(username.charAt(0).toUpperCase());
     }
-  }, [firstName]);
-
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-
-  const handleSkillsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const skill = event.target.value;
-    setSelectedSkills((prevSkills) => {
-      if (prevSkills.includes(skill)) {
-        return prevSkills.filter((s) => s !== skill);
-      } else {
-        return [...prevSkills, skill];
-      }
-    });
-  };
+  }, [username]);
 
   return (
     <nav className="w-full h-32 py-4 px-6 flex-row-center-between">
@@ -94,7 +81,7 @@ export default function Nav() {
           </Link>
           <Link to={"/profile"}>
             <Avatar>
-              <AvatarFallback>A</AvatarFallback>
+              <AvatarFallback>{firstLetterUsername}</AvatarFallback>
             </Avatar>
           </Link>
         </div>
