@@ -10,7 +10,7 @@ type CardProjectProps = {
   date: string;
   owner?: string;
   description: string;
-  skills: string[];
+  skills: string;
   id?: string;
 };
 
@@ -33,11 +33,11 @@ const CardProject: FC<CardProjectProps> = (props) => {
           to={`/project/${props.id}`}
       >
         <div className="flex-row-center-start gap-2">
-          {props.skills.map((tag, index) => (
-              <Badge key={index} variant="outline" className="text-sm">
-                {tag}
+          {props.skills && (
+              <Badge variant="outline" className="text-sm">
+                {props.skills}
               </Badge>
-          ))}
+          )}
         </div>
         <h3 className="text-3xl pb-4 pt-2 font-bold">{props.title}</h3>
         <p className="text-muted-foreground font-light text-base">
