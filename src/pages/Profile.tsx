@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -32,10 +33,13 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Nav from "@/components/Header/Nav";
 import { Icons } from "@/components/ui/icons";
+import { useEffect } from "react";
+import { userInfo } from "os";
 
 export default function Profile() {
   const {
     token,
+    bearerToken,
     username,
     firstLetterUsername,
     setToken,
@@ -43,6 +47,10 @@ export default function Profile() {
     setIsLoading,
   } = useStore();
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   if (!token) {
     return <RedirectPageAuth />;
@@ -56,7 +64,7 @@ export default function Profile() {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          Authorization: bearerToken,
         },
       });
 
@@ -83,6 +91,35 @@ export default function Profile() {
     setIsLoading(false);
   };
 
+  const displayProfileInfos = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: bearerToken,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setFirstName(data.firstName);
+        setLastName(data.lastName);
+        setEmail(data.email);
+        setPassword(data.password);
+      } else {
+        console.error("Error:", response.status);
+        toast.error("Erreur lors de la récupération des informations");
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    displayProfileInfos();
+  });
+
   return (
     <section className="w-screen h-full p-4">
       <Nav></Nav>
@@ -94,25 +131,57 @@ export default function Profile() {
           <h1 className="text-4xl font-semibold">Hello {username} !</h1>
         </div>
         <div className="flex-col-start-center w-1/4">
-          <Label htmlFor="lastname"> Nom : </Label>
-          <Input type="text" className="w-full my-2" />
+          <Label htmlFor="firstName">Prénom : </Label>
+          <Input
+            type="text"
+            id="firstName"
+            name="firstName"
+            className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground"
+            value={firstName}
+            defaultValue={firstName}
+            placeholder={`${firstName}`}
+          />
         </div>
         <div className="flex-col-start-center w-1/4">
-          <Label htmlFor="name">Prénom : </Label>
-          <Input type="text" className="w-full my-2" />
+          <Label htmlFor="lastName"> Nom : </Label>
+          <Input
+            type="text"
+            id="lastName"
+            name="lastName"
+            className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground"
+            value={lastName}
+            defaultValue={lastName}
+            placeholder={`${lastName}`}
+          />
         </div>
         <div className="flex-col-start-center w-1/4">
           <Label htmlFor="email">Email : </Label>
-          <Input type="email" className="w-full my-2" />
+          <Input
+            type="email"
+            className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground"
+            id="email"
+            name="email"
+            value={email}
+            defaultValue={email}
+            placeholder={`${email}`}
+          />
         </div>
         <div className="flex-col-start-center w-1/4">
           <Label htmlFor="passworld">Mot de passe :</Label>
-          <Input type="password" className="w-full my-2" />
+          <Input
+            type="password"
+            className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground"
+            id="password"
+            name="password"
+            value={password}
+            defaultValue={password}
+            placeholder={`${password}`}
+          />
         </div>
         <div className="flex-col-start-center w-1/4">
           <Label htmlFor="status">Statut</Label>
           <Select>
-            <SelectTrigger className="w-full my-2">
+            <SelectTrigger className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground">
               <SelectValue placeholder="Votre statut" />
             </SelectTrigger>
             <SelectContent>
