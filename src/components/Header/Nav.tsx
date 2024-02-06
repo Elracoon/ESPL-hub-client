@@ -27,7 +27,7 @@ export default function Nav() {
     return haveNotifs === true ? (
       <div>
         <Bell />
-        <div className="absolute right-0 bottom-0 h-4 w-4 bg-primary rounded-full"></div>
+        <div className="absolute right-0 top-0 h-4 w-4 bg-primary rounded-full"></div>
       </div>
     ) : (
       <Bell />
@@ -47,7 +47,7 @@ export default function Nav() {
       <div className="flex-row-center-between gap-4">
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Create +</Button>
+            <Button size={"lg"}>Create +</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[450px]">
             <DialogHeader>

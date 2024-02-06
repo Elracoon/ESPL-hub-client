@@ -27,7 +27,7 @@ export default function Profile() {
     return <RedirectPageAuth />;
   }
   return (
-    <section className="w-full h-full">
+    <section className="w-screen h-full p-4">
       <Nav></Nav>
       <div className="tabs-content-dashboard flex-col-center-center text-center w-1-4 h-full gap-4">
         <div className="flex-col-center-center gap-4 mt-8">
