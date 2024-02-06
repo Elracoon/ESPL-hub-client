@@ -13,10 +13,19 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import  Nav  from "@/components/Header/Nav";
+import {useState} from "react";
+import useStore from "@/lib/store";
 
 export default function Profile() {
   const inputStyle = "w-1/4 mb-2.5 mt-2.5";
   const buttonStyle = "w-4/5 mb-2.5 px-10";
+  const { username } = useStore();
+
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setIsActive((current: any) => !current);
+  };
   return (
       <section>
         <Nav></Nav>
@@ -25,6 +34,7 @@ export default function Profile() {
             <Avatar>
               <AvatarFallback>LG</AvatarFallback>
             </Avatar>
+            <h2 className="text-2xl font-semibold mt-2.5">{username}</h2>
             <Label htmlFor="lastname" className={"mt-2.5"}> Nom : </Label>
             <Input type="text" className={inputStyle} />
             <Label htmlFor="name">Prénom : </Label>
@@ -49,11 +59,11 @@ export default function Profile() {
               </SelectContent>
             </Select>
             <div className="flex">
-              <Badge className={"bg-blue-500 mx-2"}>Développement Web</Badge>
-              <Badge className={"bg-green-500 mx-2"}>Marketing</Badge>
-              <Badge className={"bg-red-500 mx-2"}>Communication</Badge>
-              <Badge className={"bg-yellow-500 mx-2 "}>UX-UI</Badge>
-              <Badge className={"bg-purple-500 mx-2"}>Création Numérique</Badge>
+              <Badge variant={"dev"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Développement Web</Badge>
+              <Badge variant={"marketing"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Marketing</Badge>
+              <Badge variant={"communication"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Communication</Badge>
+              <Badge variant={"ux"} className={isActive ? 'hidden' : ''} onClick={handleClick}>UX-UI</Badge>
+              <Badge variant={"creanum"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Création Numérique</Badge>
             </div>
             <div className="mb-2.5">
               <Label htmlFor="theme">Thème :</Label> <br />
