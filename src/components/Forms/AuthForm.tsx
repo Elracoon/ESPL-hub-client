@@ -120,6 +120,42 @@ export default function AuthForm() {
     }
   }
 
+  async function loginUser(event: React.SyntheticEvent) {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`http://localhost:3000/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Error:", response);
+        toast.error(
+          "Une erreur est survenue durant l'appel de l'API, veuillez réessayer"
+        );
+      } else {
+        console.log("Success:", response);
+        toast.success("Vous êtes maintenant connecté");
+        signIn();
+        navigate("/");
+        setIsLoading(false);
+      }
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast.error("Une erreur est survenue, veuillez réessayer");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <section className="page my-52">
       <Tabs defaultValue="signin" className="w-[400px]">
