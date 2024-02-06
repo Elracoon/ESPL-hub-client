@@ -24,8 +24,6 @@ export default function Register() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("");
-  const [competences, setCompetences] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -42,12 +40,6 @@ export default function Register() {
         break;
       case "password":
         setPassword(e.target.value);
-        break;
-      case "status":
-        setStatus(e.target.value);
-        break;
-      case "competences":
-        setCompetences(e.target.value);
         break;
       default:
         break;
@@ -69,8 +61,6 @@ export default function Register() {
           lastName: lastName,
           email: email,
           password: password,
-          status: status,
-          competences: competences,
         }),
       });
 
@@ -152,86 +142,6 @@ export default function Register() {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="status">Statut</label>
-            <select
-              name="status"
-              id="status"
-              defaultValue={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="student">student</option>
-              <option value="teacher">teacher</option>
-              <option value="company">company</option>
-              <option value="association">association</option>
-              <option value="other">other</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="competences">Compétences</label>
-            <select
-              name="competences"
-              id="competences"
-              defaultValue={competences}
-              onChange={(e) => setCompetences(e.target.value)}
-            >
-              <option value="ux/ui">ux/ui</option>
-              <option value="development">development</option>
-              <option value="design">design</option>
-              <option value="marketing">marketing</option>
-              <option value="communication">communication</option>
-            </select>
-          </div>
-          {/* <div className="space-y-1">
-                <Label htmlFor="status">Statut</Label>
-                <Select
-                  value={status}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    setStatus(e.target.value)
-                  }
-                >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Votre statut" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Statut</SelectLabel>
-                      <SelectItem value="student">Etudiant</SelectItem>
-                      <SelectItem value="teacher">Intervenant</SelectItem>
-                      <SelectItem value="company">Entreprise</SelectItem>
-                      <SelectItem value="association">Association</SelectItem>
-                      <SelectItem value="other">Autre</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="skills">Compétences</Label>
-                <Select
-                  value={competences}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    setStatus(e.target.value)
-                  }
-                >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Vos compétences" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Compétences</SelectLabel>
-                      <SelectItem value="developpement">
-                        Développement
-                      </SelectItem>
-                      <SelectItem value="ux/ui">UX / UI</SelectItem>
-                      <SelectItem value="marketing">Marketing</SelectItem>
-                      <SelectItem value="communication">
-                        Communication
-                      </SelectItem>
-                      <SelectItem value="design">Création Numérique</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div> */}
         </CardContent>
         <CardFooter>
           <Button disabled={isLoading} onClick={createUser}>

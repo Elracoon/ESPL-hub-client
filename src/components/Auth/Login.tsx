@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import useStore from "@/lib/store";
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { TabsContent } from "@/components/ui/tabs";
 import {
   Card,
   CardHeader,
