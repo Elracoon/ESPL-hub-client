@@ -30,15 +30,20 @@ import { Icons } from "@/components/ui/icons";
 
 export default function AuthForm() {
   const { signIn, setUsername } = useStore();
+  const [username, setUser] = useState("");
   const [name, setName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
+      case "username":
+        setUser(e.target.value);
+        break;
       case "name":
         setName(e.target.value);
         break;
@@ -50,6 +55,9 @@ export default function AuthForm() {
         break;
       case "password":
         setPassword(e.target.value);
+        break;
+      case "status":
+        setStatus(e.target.value);
         break;
       default:
         break;
@@ -66,6 +74,32 @@ export default function AuthForm() {
       setIsLoading(false);
       setUsername(firstName);
     }, 2000);
+
+    const userValues = {
+      username: username,
+      name: name,
+      firstName: firstName,
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/add`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (!response.ok) {
+        console.error('Error:', response);
+      } else {
+        console.log('Success:', response);
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 
   return (
@@ -83,13 +117,13 @@ export default function AuthForm() {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="name">Nom</Label>
+                <Label htmlFor="username">Pseudo</Label>
                 <Input
                   autoComplete="off"
-                  id="name"
+                  id="username"
                   type="text"
-                  value={name}
-                  placeholder="Votre nom"
+                  value={username}
+                  placeholder="Votre pseudo"
                   onChange={handleChange}
                 />
               </div>
@@ -101,6 +135,17 @@ export default function AuthForm() {
                   type="text"
                   value={firstName}
                   placeholder="Votre prénom"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="name">Nom</Label>
+                <Input
+                  autoComplete="off"
+                  id="name"
+                  type="text"
+                  value={name}
+                  placeholder="Votre nom"
                   onChange={handleChange}
                 />
               </div>
@@ -126,7 +171,7 @@ export default function AuthForm() {
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="password">Statut</Label>
+                <Label htmlFor="status">Statut</Label>
                 <Select>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Votre statut" />
@@ -139,6 +184,24 @@ export default function AuthForm() {
                       <SelectItem value="company">Entreprise</SelectItem>
                       <SelectItem value="association">Association</SelectItem>
                       <SelectItem value="other">Autre</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="skills">Compétences</Label>
+                <Select>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Vos compétences" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Compétences</SelectLabel>
+                      <SelectItem value="developpement">Développement</SelectItem>
+                      <SelectItem value="ux/ui">UX / UI</SelectItem>
+                      <SelectItem value="marketing">Marketing</SelectItem>
+                      <SelectItem value="communication">Communication</SelectItem>
+                      <SelectItem value="design">Création Numérique</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
