@@ -32,14 +32,14 @@ const CardProject: FC<CardProjectProps> = (props) => {
           }`}
           to={`/project/${props.id}`}
       >
-        <div className="flex-row-center-start gap-2">
+        {/* <div className="flex-row-center-start gap-2">
           {props.skills && (
               <Badge variant="outline" className="text-sm">
                 {props.skills}
               </Badge>
           )}
-        </div>
-        <h3 className="text-3xl pb-4 pt-2 font-bold">{props.title}</h3>
+        </div> */}
+        <h3 className="text-3xl pb-2 pt-2 font-bold">{props.title}</h3>
         <p className="text-muted-foreground font-light text-base">
           Projet créé par{" "}
           <span className={theme === "light" ? "text-black" : "text-white"}>
@@ -50,7 +50,7 @@ const CardProject: FC<CardProjectProps> = (props) => {
           {props.date}
         </span>
         </p>
-        <p className="pt-6 pb-10 text-lg">{lengthDescription(props.description)}</p>
+        <p className="pt-6 pb-10 text-lg font-light">{lengthDescription(props.description)}</p>
         <Link to={`/project/${props.id}`}>
           <Button size="lg">En savoir plus</Button>
         </Link>

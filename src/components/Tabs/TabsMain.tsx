@@ -3,6 +3,7 @@ import CardProject from "@/components/Cards/CardProject";
 import { TabsContent } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import  useStore  from "@/lib/store";
+import {Pagination,PaginationContent,PaginationItem,PaginationLink,PaginationNext,PaginationPrevious,} from "@/components/ui/pagination"
 
 export default function TabsMain() {
   const token = useStore();
@@ -56,6 +57,26 @@ export default function TabsMain() {
           );
         })}
       </div>
+      <Pagination className="mt-8">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious  href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" isActive>1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">2</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">3</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </TabsContent>
+    
   );
 }
