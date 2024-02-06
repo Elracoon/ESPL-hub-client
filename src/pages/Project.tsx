@@ -21,8 +21,8 @@ export default function Project() {
     <section className="w-screen h-full p-4">
       <div className="tabs-content-dashboard">
         <div className="tabs-content-header">
-          <div className="tabs-content-header-title w-12 h-12 rounded-lg hover:bg-secondary/80 flex-row-center-center hover:cursor-pointer">
-            <Link to={"/"}>
+          <div className="tabs-content-header-title rounded-lg w-12 h-12 hover:bg-secondary/80 flex-row-center-center hover:cursor-pointer">
+            <Link to={"/"} className="w-12 h-12 flex-col-center-center">
               <FontAwesomeIcon icon={faArrowLeft} className="text-xl" />
             </Link>
           </div>
