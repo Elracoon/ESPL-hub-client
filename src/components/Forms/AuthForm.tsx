@@ -17,20 +17,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Icons } from "@/components/ui/icons";
 
 export default function AuthForm() {
-  const { signIn, setUsername } = useStore();
-  const [username, setUser] = useState("");
+  const { setToken, setUsername } = useStore();
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,14 +32,11 @@ export default function AuthForm() {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
-      case "username":
-        setUser(e.target.value);
+      case "firstName":
+        setFirstName(e.target.value);
         break;
       case "lastName":
         setLastName(e.target.value);
-        break;
-      case "firstName":
-        setFirstName(e.target.value);
         break;
       case "email":
         setEmail(e.target.value);
@@ -72,16 +59,6 @@ export default function AuthForm() {
     event.preventDefault();
     setIsLoading(true);
 
-    console.log(
-      username,
-      lastName,
-      firstName,
-      email,
-      password,
-      status,
-      competences
-    );
-
     try {
       const response = await fetch(`http://localhost:3000/users/add`, {
         method: "POST",
@@ -89,7 +66,6 @@ export default function AuthForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
           firstName: firstName,
           lastName: lastName,
           email: email,
@@ -99,6 +75,8 @@ export default function AuthForm() {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
         console.error("Error:", response);
         toast.error(
@@ -107,7 +85,7 @@ export default function AuthForm() {
       } else {
         console.log("Success:", response);
         toast.success("Votre compte a bien été créé");
-        signIn();
+        setToken(data.token);
         navigate("/");
         setIsLoading(false);
         setUsername(firstName);
@@ -136,6 +114,8 @@ export default function AuthForm() {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
         console.error("Error:", response);
         toast.error(
@@ -144,7 +124,7 @@ export default function AuthForm() {
       } else {
         console.log("Success:", response);
         toast.success("Vous êtes maintenant connecté");
-        signIn();
+        setToken(data.token);
         navigate("/");
         setIsLoading(false);
       }
@@ -170,18 +150,6 @@ export default function AuthForm() {
               <CardDescription>Nouveau ici ? Créez un compte</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="username">Pseudo</Label>
-                <Input
-                  autoComplete="off"
-                  id="username"
-                  name="username"
-                  type="text"
-                  value={username}
-                  placeholder="Votre pseudo"
-                  onChange={handleChange}
-                />
-              </div>
               <div className="space-y-1">
                 <Label htmlFor="firstName">Prénom</Label>
                 <Input
@@ -329,19 +297,29 @@ export default function AuthForm() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="Your email" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Your email"
+                  onChange={handleChange}
+                  value={email}
+                />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="password">Mot de passe</Label>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
                   placeholder="Enter yout password"
+                  onChange={handleChange}
+                  value={password}
                 />
               </div>
             </CardContent>
             <CardFooter>
-              <Button disabled={isLoading}>
+              <Button disabled={isLoading} onClick={loginUser}>
                 {isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
