@@ -27,8 +27,8 @@ export default function Profile() {
     setIsActive((current: any) => !current);
   };
   return (
-      <section>
-        <Nav></Nav>
+      <section className="w-screen h-full p-4">
+        <Nav />
         <div>
           <div className="tabs-content-dashboard flex-col-center text-center">
             <Avatar>
@@ -59,11 +59,11 @@ export default function Profile() {
               </SelectContent>
             </Select>
             <div className="flex">
-              <Badge variant={"dev"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Développement Web</Badge>
-              <Badge variant={"marketing"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Marketing</Badge>
-              <Badge variant={"communication"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Communication</Badge>
-              <Badge variant={"ux"} className={isActive ? 'hidden' : ''} onClick={handleClick}>UX-UI</Badge>
-              <Badge variant={"creanum"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Création Numérique</Badge>
+              <Badge variant={"dev"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Développement Web | X</Badge>
+              <Badge variant={"marketing"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Marketing | X</Badge>
+              <Badge variant={"communication"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Communication | X</Badge>
+              <Badge variant={"ux"} className={isActive ? 'hidden' : ''} onClick={handleClick}>UX-UI | X</Badge>
+              <Badge variant={"creanum"} className={isActive ? 'hidden' : ''} onClick={handleClick}>Création Numérique | X</Badge>
             </div>
             <div className="mb-2.5">
               <Label htmlFor="theme">Thème :</Label> <br />
