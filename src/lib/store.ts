@@ -12,6 +12,7 @@ interface Store {
   username: string;
   firstLetterUsername: string;
   haveNotifs: boolean;
+  bearerToken: string;
   setIsDeleting: (value: boolean) => void;
   setIsUpdating: (value: boolean) => void;
   setIsLoading: (value: boolean) => void;
@@ -31,6 +32,7 @@ const useStore = create<Store>((set) => ({
   username: username || "",
   haveNotifs: false,
   firstLetterUsername: username ? username[1].toUpperCase() : "",
+  bearerToken: `Bearer ${savedToken}` ?? "",
   setToken: (value: string) => {
     set({ token: value });
     sessionStorage.setItem("token", value);

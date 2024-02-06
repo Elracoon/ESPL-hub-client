@@ -62,7 +62,6 @@ export default function Login() {
           "Une erreur est survenue durant l'appel de l'API, veuillez réessayer"
         );
       } else {
-        console.log("Success:", response);
         toast.success("Vous êtes maintenant connecté");
         setToken(data.token);
         navigate("/");

@@ -20,10 +20,9 @@ import { Icons } from "@/components/ui/icons";
 import { toast } from "sonner";
 
 export default function AddProjectForm() {
-  const { isLoading, setIsLoading } = useStore();
+  const { isLoading, setIsLoading, bearerToken } = useStore();
   const [responseString, setResponseString] = useState<string>("");
   const [title, setTitle] = useState("");
-  const [competences, setCompetences] = useState("");
   const [description, setDescription] = useState("");
 
   const handleCreateProject = async () => {
@@ -31,25 +30,29 @@ export default function AddProjectForm() {
     await loading(2000);
 
     try {
-      const body = JSON.stringify({ title, competences, description });
-
-      const response = await fetch(`http://localhost:3000/projects/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/projects/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearerToken,
+          },
+          body: JSON.stringify({
+            title: title,
+            description: description,
+          }),
+        }
+      );
 
       if (response.ok) {
-        const data = await response.text();
         toast.success("Projet créé avec succès");
       } else {
         console.error("Error:", response.status);
         toast.error("Erreur lors de la création du projet");
       }
     } catch (err: any) {
-      console.error(err, "ici");
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -63,9 +66,6 @@ export default function AddProjectForm() {
     switch (name) {
       case "title":
         setTitle(value);
-        break;
-      case "competences":
-        setCompetences(value);
         break;
       case "description":
         setDescription(value);
@@ -96,18 +96,6 @@ export default function AddProjectForm() {
               placeholder="Titre"
               className="col-span-3"
               value={title}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-col-start-center gap-3">
-            <Label htmlFor="competences" className="text-right">
-              Compétences
-            </Label>
-            <Input
-              name="competences"
-              placeholder="Compétences recherchées"
-              className="col-span-3"
-              value={competences}
               onChange={handleChange}
             />
           </div>
