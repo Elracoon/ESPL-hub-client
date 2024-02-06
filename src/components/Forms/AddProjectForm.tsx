@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from "react";
+import { toast } from "sonner";
 
 import useStore from "@/lib/store";
 import loading from "@/lib/loading";
@@ -17,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Icons } from "@/components/ui/icons";
-import { toast } from "sonner";
 
 export default function AddProjectForm() {
   const { isLoading, setIsLoading, bearerToken } = useStore();

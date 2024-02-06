@@ -43,16 +43,19 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/users/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
       const data = await response.json();
 

@@ -51,18 +51,21 @@ export default function Register() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/users/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/users/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
