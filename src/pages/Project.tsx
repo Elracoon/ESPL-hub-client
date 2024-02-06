@@ -50,27 +50,23 @@ export default function Project() {
           <div className="w-full flex-col-start-start gap-5 py-10">
             <h2 className="text-3xl font-semibold">Compétences recherchées</h2>
             <div className="flex-row-center-start gap-3">
-              <Badge variant={"outline"} className="text-md">
-                dev
+              <Badge variant={"dev"} className="text-md text-white">
+                Développement web
               </Badge>
-              <Badge variant={"outline"} className="text-md">
-                marketing
+              <Badge variant={"marketing"} className="text-md text-white">
+                Marketing
               </Badge>
-              <Badge variant={"outline"} className="text-md">
-                communication
-              </Badge>
-              <Badge variant={"outline"} className="text-md">
-                seo
+              <Badge variant={"communication"} className="text-md text-white">
+                Communication
               </Badge>
             </div>
           </div>
           <div className="w-full flex-col-start-start gap-5 py-10">
             <h2 className="text-3xl font-semibold">Membres</h2>
             <div className="flex-row-center-start gap-3">
-              <UserMember name="Broudoux" firstName="Arthur" avatar="A" />
-              <UserMember name="Broudoux" firstName="Arthur" avatar="A" />
-              <UserMember name="Broudoux" firstName="Arthur" avatar="A" />
-              <UserMember name="Broudoux" firstName="Arthur" avatar="A" />
+              <UserMember name="Broudoux" firstName="Arthur" avatar="A" role={"ux"} />
+              <UserMember name="Broudoux" firstName="Arthur" avatar="A" role={"dev"}/>
+              <UserMember name="Broudoux" firstName="Arthur" avatar="A" role={"creanum"}/>
             </div>
           </div>
           <div className="w-full h-full flex-col-start-center gap-8 mt-12">
