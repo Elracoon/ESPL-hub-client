@@ -31,11 +31,14 @@ export default function AddProjectForm() {
     await loading(2000);
 
     try {
+      const body = JSON.stringify({ title, competences, description });
+
       const response = await fetch(`http://localhost:3000/projects/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body,
       });
 
       if (response.ok) {
@@ -46,7 +49,7 @@ export default function AddProjectForm() {
         toast.error("Erreur lors de la création du projet");
       }
     } catch (err: any) {
-      console.error(err);
+      console.error(err, "ici");
     } finally {
       setIsLoading(false);
     }
