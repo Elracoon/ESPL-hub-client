@@ -20,18 +20,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function Nav() {
-  const [firstLetterUsername, setFirstLetterUsername] = useState("");
-  const { username } = useStore();
-  const [firstLetterFirstName, setFirstLetterFirstName] = useState("");
+  const { firstLetterUsername } = useStore();
   const { haveNotifs } = useStore();
 
-  useEffect(() => {
-    if (username && username.length > 0) {
-      setFirstLetterUsername(username.charAt(0).toUpperCase());
-    }
-  }, [username]);
-
-  const haveUnreadNotifs = () => {
+  const haveNotifications = () => {
     return haveNotifs === true ? (
       <div>
         <Bell />
@@ -110,8 +102,8 @@ export default function Nav() {
           </DialogContent>
         </Dialog>
         <Link to={"/notifications"}>
-          <div className="flex-col-center-center rounded-full h-10 w-10 relative">
-            {haveUnreadNotifs()}
+          <div className="flex-col-center-center rounded-lg w-12 h-12 relative hover:bg-secondary/80">
+            {haveNotifications()}
           </div>
         </Link>
         <Link to={"/profile"}>

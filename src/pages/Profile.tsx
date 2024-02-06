@@ -1,3 +1,7 @@
+import useStore from "@/lib/store";
+
+import RedirectPageAuth from "@/pages/RedirectPageAuth";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -7,67 +11,76 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectLabel,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import  Nav  from "@/components/Header/Nav";
+import Nav from "@/components/Header/Nav";
 
 export default function Profile() {
-  const inputStyle = "w-1/4 mb-2.5 mt-2.5";
-  const buttonStyle = "w-4/5 mb-2.5 px-10";
+  const { token, username, firstLetterUsername } = useStore();
+  const inputStyle = "w-full my-2";
+
+  if (!token) {
+    return <RedirectPageAuth />;
+  }
   return (
-      <section>
-        <Nav></Nav>
-        <div>
-          <div className="tabs-content-dashboard flex-col-center text-center">
-            <Avatar>
-              <AvatarFallback>LG</AvatarFallback>
-            </Avatar>
-            <Label htmlFor="lastname" className={"mt-2.5"}> Nom : </Label>
-            <Input type="text" className={inputStyle} />
-            <Label htmlFor="name">Prénom : </Label>
-            <Input type="text" className={inputStyle} />
-            <Label htmlFor="email">Email : </Label>
-            <Input type="email" className={inputStyle} />
-            <Label htmlFor="passworld">Mot de passe :</Label>
-            <Input type="password" className={inputStyle} />
-            <Label htmlFor="statut">Statut :</Label>
-            <Select>
-              <SelectTrigger className={inputStyle}>
-                <SelectValue placeholder="Choisir une compétence à ajouter" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="dev">Développement Web</SelectItem>
-                  <SelectItem value="marketing">Marketing</SelectItem>
-                  <SelectItem value="communication">Communication</SelectItem>
-                  <SelectItem value="ux-ui">UX-UI</SelectItem>
-                  <SelectItem value="creanum">Création Numérique</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <div className="flex">
-              <Badge className={"bg-blue-500 mx-2"}>Développement Web</Badge>
-              <Badge className={"bg-green-500 mx-2"}>Marketing</Badge>
-              <Badge className={"bg-red-500 mx-2"}>Communication</Badge>
-              <Badge className={"bg-yellow-500 mx-2 "}>UX-UI</Badge>
-              <Badge className={"bg-purple-500 mx-2"}>Création Numérique</Badge>
-            </div>
-            <div className="mb-2.5">
-              <Label htmlFor="theme">Thème :</Label> <br />
-              <ModeToggle></ModeToggle> <br />
-            </div>
-            <div>
-              <Button className={buttonStyle}> Déconnexion </Button> <br />
-              <Button variant={"destructive"} className={buttonStyle}>
-                {" "}
-                Supprimer son compte{" "}
-              </Button>
-            </div>
-          </div>
+    <section className="w-full h-full">
+      <Nav></Nav>
+      <div className="tabs-content-dashboard flex-col-center-center text-center w-1-4 h-full gap-4">
+        <div className="flex-col-center-center gap-4 mt-8">
+          <Avatar>
+            <AvatarFallback>{firstLetterUsername}</AvatarFallback>
+          </Avatar>
+          <h1 className="text-4xl font-semibold">Hello {username} !</h1>
         </div>
-      </section>
+        <div className="flex-col-start-center w-1/4">
+          <Label htmlFor="lastname"> Nom : </Label>
+          <Input type="text" className={inputStyle} />
+        </div>
+        <div className="flex-col-start-center w-1/4">
+          <Label htmlFor="name">Prénom : </Label>
+          <Input type="text" className={inputStyle} />
+        </div>
+        <div className="flex-col-start-center w-1/4">
+          <Label htmlFor="email">Email : </Label>
+          <Input type="email" className={inputStyle} />
+        </div>
+        <div className="flex-col-start-center w-1/4">
+          <Label htmlFor="passworld">Mot de passe :</Label>
+          <Input type="password" className={inputStyle} />
+        </div>
+        <div className="flex-col-start-center w-1/4">
+          <Label htmlFor="status">Statut</Label>
+          <Select>
+            <SelectTrigger className={inputStyle}>
+              <SelectValue placeholder="Votre statut" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Statut</SelectLabel>
+                <SelectItem value="student">Etudiant</SelectItem>
+                <SelectItem value="teacher">Intervenant</SelectItem>
+                <SelectItem value="company">Entreprise</SelectItem>
+                <SelectItem value="association">Association</SelectItem>
+                <SelectItem value="other">Autre</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex-col-start-center w-1/4">
+          <Label htmlFor="theme">Thème :</Label>
+          <ModeToggle></ModeToggle>
+        </div>
+        <div className="flex-row-center-center w-1/4 gap-4">
+          <Button size={"lg"}>Déconnexion</Button> <br />
+          <Button variant={"destructive"} size={"lg"}>
+            Supprimer son compte
+          </Button>
+        </div>
+      </div>
+    </section>
   );
 }
