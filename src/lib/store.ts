@@ -4,7 +4,7 @@ const savedToken = sessionStorage.getItem("token");
 const username = sessionStorage.getItem("username");
 
 interface Store {
-  token: boolean;
+  token: string;
   isDeleting: boolean;
   isUpdating: boolean;
   isLoading: boolean;
@@ -12,8 +12,6 @@ interface Store {
   username: string;
   firstLetterUsername: string;
   haveNotifs: boolean;
-  signIn: () => void;
-  signOut: () => void;
   setIsDeleting: (value: boolean) => void;
   setIsUpdating: (value: boolean) => void;
   setIsLoading: (value: boolean) => void;
@@ -21,25 +19,21 @@ interface Store {
   setUsername: (value: string) => void;
   setFirstLetterUsername: (value: string) => void;
   setHaveNotifs: (value: boolean) => void;
+  setToken: (value: string) => void;
 }
 
 const useStore = create<Store>((set) => ({
-  token: savedToken ? JSON.parse(savedToken) : false,
+  token: savedToken || "",
   isDeleting: false,
   isUpdating: false,
   isLoading: false,
   isCreating: false,
-  username: username ? JSON.parse(username) : "",
+  username: username || "",
   haveNotifs: false,
   firstLetterUsername: username ? username[1].toUpperCase() : "",
-  signIn: () => {
-    set({ token: true });
-    sessionStorage.setItem("token", JSON.stringify(true));
-  },
-  signOut: () => {
-    set({ token: false });
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("firstName");
+  setToken: (value: string) => {
+    set({ token: value });
+    sessionStorage.setItem("token", value);
   },
   setIsDeleting: (value: boolean) => set({ isDeleting: value }),
   setIsUpdating: (value: boolean) => set({ isUpdating: value }),
@@ -47,7 +41,7 @@ const useStore = create<Store>((set) => ({
   setIsCreating: (value: boolean) => set({ isCreating: value }),
   setUsername: (value: string) => {
     set({ username: value });
-    sessionStorage.setItem("username", JSON.stringify(value));
+    sessionStorage.setItem("username", value);
   },
   setHaveNotifs: (value: boolean) => set({ haveNotifs: value }),
   setFirstLetterUsername: (value: string) =>

@@ -5,7 +5,7 @@ import envCompatible from "vite-plugin-env-compatible";
 import path from "path";
 
 export default defineConfig({
-  envPrefix: "ENV_VAR_",
+  envPrefix: "ENV_VAR",
   build: {
     outDir: "dist",
   },
