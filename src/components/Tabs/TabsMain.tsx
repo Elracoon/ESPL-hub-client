@@ -7,12 +7,16 @@ export default function TabsMain() {
   const [projects, setProjects] = useState([]);
 
   const getProjects = async () => {
-    const response = await fetch("http://localhost:3000/projects/", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await response.json();
-    setProjects(data);
+    try {
+      const response = await fetch("http://localhost:3000/projects", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+      setProjects(data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des projets :", error);
+    }
   };
 
   useEffect(() => {
@@ -28,15 +32,16 @@ export default function TabsMain() {
         />
       </div>
       <div className="flex-row-center gap-4 flex-wrap">
-        {/* {projects.map((project) => (
+        {projects.map((project: { id: string; title: string; createdAt: any; description: string; projectManager: string; competences: string[] }) => (
           <CardProject
+            key={project.id}
             title={project.title}
-            date={project.date}
+            date={project.createdAt}
             description={project.description}
-            owner={project.owner}
-            skills={project.skills}
+            owner={project.projectManager}
+            skills={project.competences}
           />
-        ))} */}
+        ))}
       </div>
     </TabsContent>
   );
