@@ -31,11 +31,12 @@ import { Icons } from "@/components/ui/icons";
 export default function AuthForm() {
   const { signIn, setUsername } = useStore();
   const [username, setUser] = useState("");
-  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
+  const [competences, setCompetences] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -44,8 +45,8 @@ export default function AuthForm() {
       case "username":
         setUser(e.target.value);
         break;
-      case "name":
-        setName(e.target.value);
+      case "lastName":
+        setLastName(e.target.value);
         break;
       case "firstName":
         setFirstName(e.target.value);
@@ -59,6 +60,9 @@ export default function AuthForm() {
       case "status":
         setStatus(e.target.value);
         break;
+      case "competences":
+        setCompetences(e.target.value);
+        break;
       default:
         break;
     }
@@ -68,37 +72,51 @@ export default function AuthForm() {
     event.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
-      signIn();
-      navigate("/");
-      setIsLoading(false);
-      setUsername(firstName);
-    }, 2000);
-
-    const userValues = {
-      username: username,
-      name: name,
-      firstName: firstName,
-      email: email,
-      password: password,
-    };
+    console.log(
+      username,
+      lastName,
+      firstName,
+      email,
+      password,
+      status,
+      competences
+    );
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/add`, {
-        method: "GET",
+      const response = await fetch(`http://localhost:3000/users/add`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          username: username,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          status: status,
+          competences: competences,
+        }),
       });
-      
-      if (!response.ok) {
-        console.error('Error:', response);
-      } else {
-        console.log('Success:', response);
-      }
 
-    } catch (error) {
-      console.error('Error:', error);
+      if (!response.ok) {
+        console.error("Error:", response);
+        toast.error(
+          "Une erreur est survenue durant l'appel de l'API, veuillez réessayer"
+        );
+      } else {
+        console.log("Success:", response);
+        toast.success("Votre compte a bien été créé");
+        signIn();
+        navigate("/");
+        setIsLoading(false);
+        setUsername(firstName);
+      }
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast.error("Une erreur est survenue, veuillez réessayer");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -121,6 +139,7 @@ export default function AuthForm() {
                 <Input
                   autoComplete="off"
                   id="username"
+                  name="username"
                   type="text"
                   value={username}
                   placeholder="Votre pseudo"
@@ -131,6 +150,7 @@ export default function AuthForm() {
                 <Label htmlFor="firstName">Prénom</Label>
                 <Input
                   autoComplete="off"
+                  name="firstName"
                   id="firstName"
                   type="text"
                   value={firstName}
@@ -139,12 +159,13 @@ export default function AuthForm() {
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="name">Nom</Label>
+                <Label htmlFor="lastName">Nom</Label>
                 <Input
                   autoComplete="off"
-                  id="name"
+                  name="lastName"
+                  id="lastName"
                   type="text"
-                  value={name}
+                  value={lastName}
                   placeholder="Votre nom"
                   onChange={handleChange}
                 />
@@ -153,6 +174,7 @@ export default function AuthForm() {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   autoComplete="off"
+                  name="email"
                   id="email"
                   type="email"
                   value={email}
@@ -164,15 +186,51 @@ export default function AuthForm() {
                 <Label htmlFor="password">Mot de passe</Label>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
                   value={password}
                   placeholder="Saisissez un mot de passe"
                   onChange={handleChange}
                 />
               </div>
-              <div className="space-y-1">
+              <div>
+                <label htmlFor="status">Statut</label>
+                <select
+                  name="status"
+                  id="status"
+                  defaultValue={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option value="student">student</option>
+                  <option value="teacher">teacher</option>
+                  <option value="company">company</option>
+                  <option value="association">association</option>
+                  <option value="other">other</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="competences">Compétences</label>
+                <select
+                  name="competences"
+                  id="competences"
+                  defaultValue={competences}
+                  onChange={(e) => setCompetences(e.target.value)}
+                >
+                  <option value="ux/ui">ux/ui</option>
+                  <option value="development">development</option>
+                  <option value="design">design</option>
+                  <option value="marketing">marketing</option>
+                  <option value="communication">communication</option>
+                </select>
+              </div>
+              {/* <div className="space-y-1">
                 <Label htmlFor="status">Statut</Label>
-                <Select>
+                <Select
+                  value={status}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    setStatus(e.target.value)
+                  }
+                >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Votre statut" />
                   </SelectTrigger>
@@ -190,22 +248,31 @@ export default function AuthForm() {
               </div>
               <div className="space-y-1">
                 <Label htmlFor="skills">Compétences</Label>
-                <Select>
+                <Select
+                  value={competences}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    setStatus(e.target.value)
+                  }
+                >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Vos compétences" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Compétences</SelectLabel>
-                      <SelectItem value="developpement">Développement</SelectItem>
+                      <SelectItem value="developpement">
+                        Développement
+                      </SelectItem>
                       <SelectItem value="ux/ui">UX / UI</SelectItem>
                       <SelectItem value="marketing">Marketing</SelectItem>
-                      <SelectItem value="communication">Communication</SelectItem>
+                      <SelectItem value="communication">
+                        Communication
+                      </SelectItem>
                       <SelectItem value="design">Création Numérique</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
             </CardContent>
             <CardFooter>
               <Button disabled={isLoading} onClick={createUser}>
