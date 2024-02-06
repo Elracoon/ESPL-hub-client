@@ -9,9 +9,11 @@ import RedirectPageAuth from "@/pages/RedirectPageAuth";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import UserMember from "@/components/Users/UserMember";
+import {useTheme} from "@/config/theme-provider";
 
 export default function Project() {
   const { token } = useStore();
+  const { theme } = useTheme();
 
   if (!token) {
     return <RedirectPageAuth />;
@@ -28,12 +30,12 @@ export default function Project() {
           </div>
           <div className="my-10 flex-col-start-start gap-5">
             <h1 className="text-6xl font-semibold">Projet</h1>
-            <p className="text-muted-foreground font-light text-base">
+            <p className={`text-muted-foreground font-light text-base ${theme === "light" ? "text-black" : "text-white"}`}>
               Projet crée par{" "}
-              <span className="text-white hover:underline hover:cursor-pointer">
+              <span className={theme === "light" ? "text-black hover:underline hover:cursor-pointer" : "text-white hover:underline hover:cursor-pointer"}>
                 Arthur
               </span>{" "}
-              le <span className="text-white">20/05/2024</span>
+              le <span className={theme === "light" ? "text-black" : "text-white"}>20/05/2024</span>
             </p>
             <p className="text-xl font-normal max-w-10xl">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
