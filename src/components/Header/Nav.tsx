@@ -5,6 +5,7 @@ import useStore from "@/lib/store";
 import AddProjectForm from "@/components/Forms/AddProjectForm";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import { Button } from "@/components/ui/button";
 
 export default function Nav() {
   const { firstLetterUsername } = useStore();
@@ -35,9 +36,12 @@ export default function Nav() {
         <AddProjectForm />
         <ModeToggle />
         <Link to={"/notifications"}>
-          <div className="flex-col-center-center rounded-lg w-12 h-12 relative hover:bg-secondary/80">
+          <Button
+            variant="outline"
+            className="flex-col-center-center rounded-lg border-[1px] w-12 h-12 relative hover:bg-secondary/80"
+          >
             {haveNotifications()}
-          </div>
+          </Button>
         </Link>
         <Link to={"/profile"}>
           <Avatar>
