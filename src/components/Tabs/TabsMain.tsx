@@ -14,11 +14,12 @@ import {
 
 export default function TabsMain() {
   const cardsPerPage = 6;
-  const { bearerToken } = useStore();
+  const { bearerToken, isLoading, setIsLoading } = useStore();
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const getProjects = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BASE_URL}/projects`,
@@ -32,14 +33,21 @@ export default function TabsMain() {
       );
       const data = await response.json();
       setProjects(data);
+      setIsLoading(false);
     } catch (error) {
       console.error("Erreur lors de la récupération des projets :", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getProjects();
   }, []);
+
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
