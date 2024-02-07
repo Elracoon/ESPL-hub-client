@@ -17,17 +17,20 @@ export default function TabsFinished() {
   const token = useStore();
   const [projectsFinished, setProjectsFinished] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  let bearer = 'Bearer ' + token.token;
+  let bearer = "Bearer " + token.token;
 
   const getProjectsFinished = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/projects/status/finish`, {
-        method: "GET",
-        headers: {
-          "Authorization": bearer,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/projects/status/finish`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: bearer,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       setProjectsFinished(data);
     } catch (error) {
@@ -41,7 +44,9 @@ export default function TabsFinished() {
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
-  const projectsCopy = Array.isArray(projectsFinished) ? projectsFinished.slice().reverse() : [];
+  const projectsCopy = Array.isArray(projectsFinished)
+    ? projectsFinished.slice().reverse()
+    : [];
   const projectsToDisplay = projectsCopy.slice(startIndex, endIndex);
   const totalPages = Math.ceil(projectsFinished.length / cardsPerPage);
   const numTabsToShow = 3;
@@ -49,7 +54,10 @@ export default function TabsFinished() {
   let endTabIndex = startTabIndex + numTabsToShow - 1;
   startTabIndex = Math.max(1, startTabIndex);
   endTabIndex = Math.min(totalPages, endTabIndex);
-  const tabsToShow = Array.from({ length: endTabIndex - startTabIndex + 1 }, (_, index) => startTabIndex + index);
+  const tabsToShow = Array.from(
+    { length: endTabIndex - startTabIndex + 1 },
+    (_, index) => startTabIndex + index
+  );
 
   return (
     <TabsContent value="finished" className="tabs-content-dashboard">
@@ -60,10 +68,25 @@ export default function TabsFinished() {
         />
       </div>
       <div className="flex-row-center gap-4 flex-wrap">
-        {projectsToDisplay.map((project: {_id: string, title: string, createdAt: string, description: string, projectManager: string, competences: string}) => {
+        {projectsToDisplay.length === 0 && (
+          <p className="text-3xl font-semibold w-full text-start">
+            Aucun projet terminé.
+          </p>
+        )}
+        {projectsToDisplay.map(
+          (project: {
+            _id: string;
+            title: string;
+            createdAt: string;
+            description: string;
+            projectManager: string;
+            competences: string;
+          }) => {
             const dateObject = new Date(project.createdAt);
-            const day = dateObject.getDate().toString().padStart(2, '0');
-            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const day = dateObject.getDate().toString().padStart(2, "0");
+            const month = (dateObject.getMonth() + 1)
+              .toString()
+              .padStart(2, "0");
             const year = dateObject.getFullYear();
             const formattedDate = `${day}/${month}/${year}`;
 
@@ -78,13 +101,15 @@ export default function TabsFinished() {
                 skills={project.competences}
               />
             );
-          })}
+          }
+        )}
       </div>
       {totalPages > 1 && (
         <Pagination className="mt-8">
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious className="cursor-pointer select-none"
+              <PaginationPrevious
+                className="cursor-pointer select-none"
                 onClick={() => {
                   if (currentPage > 1) {
                     setCurrentPage(currentPage - 1);
@@ -94,7 +119,8 @@ export default function TabsFinished() {
             </PaginationItem>
             {tabsToShow.map((page) => (
               <PaginationItem key={page}>
-                <PaginationLink className="cursor-pointer select-none"
+                <PaginationLink
+                  className="cursor-pointer select-none"
                   onClick={() => setCurrentPage(page)}
                   isActive={currentPage === page}
                 >
@@ -103,7 +129,8 @@ export default function TabsFinished() {
               </PaginationItem>
             ))}
             <PaginationItem>
-              <PaginationNext className="cursor-pointer select-none"
+              <PaginationNext
+                className="cursor-pointer select-none"
                 onClick={() => {
                   if (currentPage < totalPages) {
                     setCurrentPage(currentPage + 1);
