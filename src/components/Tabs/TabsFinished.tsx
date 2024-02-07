@@ -41,7 +41,8 @@ export default function TabsFinished() {
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
-  const projectsToDisplay = projectsFinished.slice(startIndex, endIndex);
+  const projectsCopy = projectsFinished.slice().reverse();
+  const projectsToDisplay = projectsCopy.slice(startIndex, endIndex);
   const totalPages = Math.ceil(projectsFinished.length / cardsPerPage);
   const numTabsToShow = 3;
   let startTabIndex = currentPage - Math.floor(numTabsToShow / 2);
