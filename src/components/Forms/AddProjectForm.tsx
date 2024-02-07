@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 import useStore from "@/lib/store";
 import loading from "@/lib/loading";
@@ -23,6 +24,7 @@ export default function AddProjectForm() {
   const [responseString, setResponseString] = useState<string>("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
   const handleCreateProject = async () => {
     setIsLoading(true);
@@ -45,6 +47,7 @@ export default function AddProjectForm() {
       );
 
       if (response.ok) {
+        navigate("/", { replace: true });
         toast.success("Projet créé avec succès");
       } else {
         console.error("Error:", response.status);
