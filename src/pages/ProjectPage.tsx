@@ -63,9 +63,7 @@ export default function ProjectPage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${
-          import.meta.env.VITE_BASE_URL
-        }/projects/65c23d48ee19bad2af264bae/join`,
+        `${import.meta.env.VITE_BASE_URL}/projects/${projectId}/join`,
         {
           method: "PATCH",
           headers: {
