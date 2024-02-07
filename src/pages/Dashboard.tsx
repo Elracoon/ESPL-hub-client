@@ -2,7 +2,7 @@ import { Tabs, TabsList } from "@/components/ui/tabs";
 
 import useStore from "@/lib/store";
 
-import RedirectPageAuth from "@/pages/RedirectPageAuth";
+import RedirectPageAuth from "@/pages/HomePage";
 
 import NavLink from "@/components/Header/NavLink";
 import TabsMain from "@/components/Tabs/TabsMain";

@@ -51,7 +51,9 @@ export default function TabsMain() {
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
-  const projectsCopy = Array.isArray(projects) ? projects.slice().reverse() : [];
+  const projectsCopy = Array.isArray(projects)
+    ? projects.slice().reverse()
+    : [];
   const projectsToDisplay = projectsCopy.slice(startIndex, endIndex);
   const totalPages = Math.ceil(projects.length / cardsPerPage);
   const numTabsToShow = 3;
@@ -91,6 +93,11 @@ export default function TabsMain() {
         />
       </div>
       <div className="flex-row-center gap-4 flex-wrap">
+        {projectsToDisplay.length === 0 && (
+          <p className="text-3xl font-semibold w-full text-start">
+            Aucun projet disponible.
+          </p>
+        )}
         {projectsToDisplay.map(
           (project: {
             _id: string;

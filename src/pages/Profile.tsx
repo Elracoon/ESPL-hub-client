@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import useStore from "@/lib/store";
-import RedirectPageAuth from "@/pages/RedirectPageAuth";
+import RedirectPageAuth from "@/pages/HomePage";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -31,6 +31,7 @@ export default function Profile() {
     setToken,
     isLoading,
     setIsLoading,
+    setUsername,
   } = useStore();
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
@@ -115,6 +116,7 @@ export default function Profile() {
 
       if (response.ok) {
         toast.success("Informations mises à jour avec succès");
+        setUsername(firstName);
       } else {
         console.error("Error:", response.status);
         toast.error("Erreur lors de la mise à jour des informations");

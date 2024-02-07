@@ -61,9 +61,7 @@ export default function Login() {
 
       if (!response.ok) {
         console.error("Error:", response);
-        toast.error(
-          "Une erreur est survenue durant l'appel de l'API, veuillez réessayer"
-        );
+        toast.error("Une erreur est survenue, veuillez réessayer");
       } else {
         toast.success("Vous êtes maintenant connecté");
         setToken(data.token);
@@ -72,7 +70,6 @@ export default function Login() {
       }
     } catch (error: any) {
       console.error("Error:", error);
-      toast.error("Une erreur est survenue, veuillez réessayer");
     } finally {
       setIsLoading(false);
     }

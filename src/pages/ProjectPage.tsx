@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { Icons } from "@/components/ui/icons";
 import useStore from "@/lib/store";
-import RedirectPageAuth from "@/pages/RedirectPageAuth";
+import RedirectPageAuth from "@/pages/HomePage";
 import { Button } from "@/components/ui/button";
 
 export default function ProjectPage() {

@@ -25,23 +25,23 @@ const CardProject: FC<CardProjectProps> = (props) => {
   };
 
   return (
-      <Link
-          className={`w-[31%] h-[18em] bg-background border-2 rounded-lg p-6 text-xl font-medium ${
-              theme === "light" ? "text-black" : "text-white"
-          }`}
-          to={`/project/${props.id}`}
-      >
-        {/* <div className="flex-row-center-start gap-2">
+    <Link
+      className={`w-[31%] h-[18em] bg-background border-2 rounded-lg p-6 text-xl font-medium ${
+        theme === "light" ? "text-black" : "text-white"
+      }`}
+      to={`/projects/${props.id}`}
+    >
+      {/* <div className="flex-row-center-start gap-2">
           {props.skills && (
               <Badge variant="outline" className="text-sm">
                 {props.skills}
               </Badge>
           )}
         </div> */}
-        <h3 className="text-3xl pb-2 pt-2 font-bold">{props.title}</h3>
-        <p className="text-muted-foreground font-light text-base">
-          Projet créé par{" "}
-          <span className={theme === "light" ? "text-black" : "text-white"}>
+      <h3 className="text-3xl pb-2 pt-2 font-bold">{props.title}</h3>
+      <p className="text-muted-foreground font-light text-base">
+        Projet créé par{" "}
+        <span className={theme === "light" ? "text-black" : "text-white"}>
           {props.owner}
         </span>{" "}
         le{" "}
