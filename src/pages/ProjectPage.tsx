@@ -63,7 +63,7 @@ export default function ProjectPage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/projects/${projectId}`,
+        `${import.meta.env.VITE_BASE_URL}/users/${projectId}`,
         {
           method: "PATCH",
           headers: {
@@ -74,6 +74,37 @@ export default function ProjectPage() {
       );
       navigate("/");
       toast.success("Vous faîtes maintenant partie de l'aventure !");
+      setIsLoading(false);
+    } catch (error) {
+      toast.error("Erreur lors de la demande de participation au projet");
+      console.error("Erreur lors de la récupération des projets :", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleChangeStatusProject = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/projects/status`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: bearerToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ projectId: projectId, status: "finish" }),
+        }
+      );
+
+      if (!response.ok) {
+        console.error("Error:", response.status);
+        toast.error("Vous n'avez pas les droits pour fermer ce projet");
+      } else {
+        navigate("/");
+        toast.success("Le projet est maintenant terminé !");
+      }
       setIsLoading(false);
     } catch (error) {
       toast.error("Erreur lors de la demande de participation au projet");
@@ -132,6 +163,17 @@ export default function ProjectPage() {
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 Contacter le créateur
+              </Button>
+              <Button
+                size={"lg"}
+                variant={"outline"}
+                disabled={isLoading}
+                onClick={handleChangeStatusProject}
+              >
+                {isLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Fermer le projet
               </Button>
             </div>
           </div>
