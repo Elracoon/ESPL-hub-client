@@ -5,7 +5,7 @@ import Auth from "@/pages/Auth";
 import AuthAdmin from "@/pages/AuthAdmin";
 import Profile from "@/pages/Profile";
 import Notifications from "@/pages/Notifications";
-import Project from "@/pages/Project";
+import Project from "@/pages/ProjectPage";
 import ErrorPage from "@/pages/ErrorPage";
 
 const router = createBrowserRouter([
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/project/:id",
+    path: "/projects/:projectId",
     element: <Project />,
     errorElement: <ErrorPage />,
   },
