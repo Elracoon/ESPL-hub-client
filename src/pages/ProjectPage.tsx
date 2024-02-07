@@ -9,11 +9,9 @@ import { Icons } from "@/components/ui/icons";
 import useStore from "@/lib/store";
 import RedirectPageAuth from "@/pages/RedirectPageAuth";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/config/theme-provider";
 
 export default function ProjectPage() {
   const { token, isLoading, setIsLoading, bearerToken } = useStore();
-  const { theme } = useTheme();
   const [nameProject, setNameProject] = useState("");
   const [descriptionProject, setDescriptionProject] = useState("");
   const [projectManagerName, setProjectManagerName] = useState("");
