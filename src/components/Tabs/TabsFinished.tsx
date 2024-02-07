@@ -21,7 +21,7 @@ export default function TabsFinished() {
 
   const getProjectsFinished = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/projects/status/finished`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/projects/status/finish`, {
         method: "GET",
         headers: {
           "Authorization": bearer,

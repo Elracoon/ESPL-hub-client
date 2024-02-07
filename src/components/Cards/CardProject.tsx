@@ -16,7 +16,7 @@ type CardProjectProps = {
 
 const CardProject: FC<CardProjectProps> = (props) => {
   const { theme } = useTheme();
-  const maxLenghtDescription = 230;
+  const maxLenghtDescription = 130;
 
   const lengthDescription = (description: string) => {
     if (description.length > maxLenghtDescription) {
@@ -27,7 +27,7 @@ const CardProject: FC<CardProjectProps> = (props) => {
 
   return (
       <Link
-          className={`w-[31%] h-auto bg-background border-2 rounded-lg p-6 text-xl font-medium ${
+          className={`w-[31%] h-[18em] bg-background border-2 rounded-lg p-6 text-xl font-medium ${
               theme === "light" ? "text-black" : "text-white"
           }`}
           to={`/project/${props.id}`}
