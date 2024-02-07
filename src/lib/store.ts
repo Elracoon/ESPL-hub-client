@@ -23,22 +23,13 @@ interface Store {
   setToken: (value: string) => void;
 }
 
-interface Projet {
-  id: number;
-  title: string;
-  description: string;
-  createdAt: string;
-  projectManager: string;
-  managerEmail: string;
-}
-
 const useStore = create<Store>((set) => ({
-  token: savedToken ?? "",
+  token: savedToken || "",
   isDeleting: false,
   isUpdating: false,
   isLoading: false,
   isCreating: false,
-  username: username ?? "",
+  username: username || "",
   haveNotifs: false,
   firstLetterUsername: username ? username[0].toUpperCase() : "",
   bearerToken: `Bearer ${savedToken}` ?? "",
