@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Bell, Blocks } from "lucide-react";
 
 import useStore from "@/lib/store";
-
 import AddProjectForm from "@/components/Forms/AddProjectForm";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function Nav() {
   const { firstLetterUsername } = useStore();
@@ -34,6 +33,7 @@ export default function Nav() {
       </div>
       <div className="flex-row-center-between gap-4">
         <AddProjectForm />
+        <ModeToggle />
         <Link to={"/notifications"}>
           <div className="flex-col-center-center rounded-lg w-12 h-12 relative hover:bg-secondary/80">
             {haveNotifications()}

@@ -24,14 +24,14 @@ interface Store {
 }
 
 const useStore = create<Store>((set) => ({
-  token: savedToken || "",
+  token: savedToken ?? "",
   isDeleting: false,
   isUpdating: false,
   isLoading: false,
   isCreating: false,
-  username: username || "",
+  username: username ?? "",
   haveNotifs: false,
-  firstLetterUsername: username ? username[1].toUpperCase() : "",
+  firstLetterUsername: username ? username[0].toUpperCase() : "",
   bearerToken: `Bearer ${savedToken}` ?? "",
   setToken: (value: string) => {
     set({ token: value });
