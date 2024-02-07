@@ -41,7 +41,7 @@ export default function TabsInProgress() {
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
-  const projectsCopy = projectsInProgress.slice().reverse();
+  const projectsCopy = Array.isArray(projectsInProgress) ? projectsInProgress.slice().reverse() : [];
   const projectsToDisplay = projectsCopy.slice(startIndex, endIndex);
   const totalPages = Math.ceil(projectsInProgress.length / cardsPerPage);
   const numTabsToShow = 3;
