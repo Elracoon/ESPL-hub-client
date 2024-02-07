@@ -1,22 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import useStore from "@/lib/store";
-
 import RedirectPageAuth from "@/pages/RedirectPageAuth";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectLabel,
-} from "@/components/ui/select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,8 +22,6 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Nav from "@/components/Header/Nav";
 import { Icons } from "@/components/ui/icons";
-import { useEffect } from "react";
-import { userInfo } from "os";
 
 export default function Profile() {
   const {
@@ -50,7 +37,6 @@ export default function Profile() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   if (!token) {
     return <RedirectPageAuth />;
@@ -91,6 +77,56 @@ export default function Profile() {
     setIsLoading(false);
   };
 
+  const handleChangeUserInfos = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case "firstName":
+        setFirstName(value);
+        break;
+      case "lastName":
+        setLastName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleEditUser = async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: bearerToken,
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Informations mises à jour avec succès");
+      } else {
+        console.error("Error:", response.status);
+        toast.error("Erreur lors de la mise à jour des informations");
+      }
+    } catch (err: any) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const displayProfileInfos = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
@@ -106,7 +142,6 @@ export default function Profile() {
         setFirstName(data.firstName);
         setLastName(data.lastName);
         setEmail(data.email);
-        setPassword(data.password);
       } else {
         console.error("Error:", response.status);
         toast.error("Erreur lors de la récupération des informations");
@@ -118,7 +153,7 @@ export default function Profile() {
 
   useEffect(() => {
     displayProfileInfos();
-  });
+  }, []);
 
   return (
     <section className="w-screen h-full p-4">
@@ -140,6 +175,7 @@ export default function Profile() {
             value={firstName}
             defaultValue={firstName}
             placeholder={`${firstName}`}
+            onChange={handleChangeUserInfos}
           />
         </div>
         <div className="flex-col-start-center w-1/4">
@@ -152,6 +188,7 @@ export default function Profile() {
             value={lastName}
             defaultValue={lastName}
             placeholder={`${lastName}`}
+            onChange={handleChangeUserInfos}
           />
         </div>
         <div className="flex-col-start-center w-1/4">
@@ -164,43 +201,16 @@ export default function Profile() {
             value={email}
             defaultValue={email}
             placeholder={`${email}`}
+            onChange={handleChangeUserInfos}
           />
         </div>
-        <div className="flex-col-start-center w-1/4">
-          <Label htmlFor="passworld">Mot de passe :</Label>
-          <Input
-            type="password"
-            className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground"
-            id="password"
-            name="password"
-            value={password}
-            defaultValue={password}
-            placeholder={`${password}`}
-          />
-        </div>
-        <div className="flex-col-start-center w-1/4">
-          <Label htmlFor="status">Statut</Label>
-          <Select>
-            <SelectTrigger className="w-full my-2 placeholder:text-muted-foreground text-muted-foreground focus:text-primary-foreground">
-              <SelectValue placeholder="Votre statut" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Statut</SelectLabel>
-                <SelectItem value="student">Etudiant</SelectItem>
-                <SelectItem value="teacher">Intervenant</SelectItem>
-                <SelectItem value="company">Entreprise</SelectItem>
-                <SelectItem value="association">Association</SelectItem>
-                <SelectItem value="other">Autre</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex-col-start-center w-1/4">
-          <Label htmlFor="theme">Thème :</Label>
-          <ModeToggle></ModeToggle>
-        </div>
-        <div className="flex-row-center-center w-1/4 gap-4">
+        <div className="flex-row-center-between w-1/4 gap-4">
+          <Button size={"lg"} onClick={handleEditUser} variant={"outline"}>
+            {isLoading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
+            Modifier
+          </Button>
           <Button size={"lg"} onClick={handleDeconnetUser}>
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
