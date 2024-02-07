@@ -23,7 +23,7 @@ export default function TabsMain() {
 
   const getProjects = async () => {
     try {
-      const response = await fetch("http://localhost:3000/projects", {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/users/add`, {
         method: "GET",
         headers: {
           "Authorization": bearer,
