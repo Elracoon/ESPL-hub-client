@@ -1,7 +1,7 @@
 import { TabsContent } from "@/components/ui/tabs";
 import HeaderTab from "@/components/Tabs/HeaderTab";
 import useStore from "@/lib/store";
-import CardProject from "@/components/Cards/CardProject";
+import CardProjectFinished from "@/components/Cards/CardProject";
 import { useEffect, useState } from "react";
 import {
   Pagination,
@@ -68,7 +68,7 @@ export default function TabsFinished() {
             const formattedDate = `${day}/${month}/${year}`;
 
             return (
-              <CardProject
+              <CardProjectFinished
                 id={project._id}
                 key={project._id}
                 title={project.title}

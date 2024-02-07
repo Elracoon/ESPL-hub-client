@@ -9,7 +9,7 @@ type CardProjectFinishedProps = {
   id?: string;
 };
 
-const maxLengthDescription = 230;
+const maxLengthDescription = 130;
 
 const lengthDescription = (description: string) => {
   if (description.length > maxLengthDescription) {
