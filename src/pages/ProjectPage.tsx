@@ -72,8 +72,13 @@ export default function ProjectPage() {
           },
         }
       );
-      navigate("/");
-      toast.success("Vous faîtes maintenant partie de l'aventure !");
+      if (!response.ok) {
+        console.error("Error:", response.status);
+        toast.error("Vous n'avez pas les droits pour fermer ce projet");
+      } else {
+        navigate("/");
+        toast.success("Vous faîtes maintenant partie de l'aventure !");
+      }
       setIsLoading(false);
     } catch (error) {
       toast.error("Erreur lors de la demande de participation au projet");
