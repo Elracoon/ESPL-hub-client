@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Dashboard from "@/pages/Dashboard";
 import Auth from "@/pages/Auth";
-import AuthAdmin from "@/pages/AuthAdmin";
 import Profile from "@/pages/Profile";
 import Notifications from "@/pages/Notifications";
 import Project from "@/pages/ProjectPage";
@@ -17,11 +16,6 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <Auth />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/auth/admin",
-    element: <AuthAdmin />,
     errorElement: <ErrorPage />,
   },
   {
