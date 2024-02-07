@@ -12,14 +12,12 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const cardsPerPage = 6;
-
 export default function TabsMain() {
+  const cardsPerPage = 6;
   const token = useStore();
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
-  var bearer = 'Bearer ' + token.token;
+  let bearer = 'Bearer ' + token.token;
 
   const getProjects = async () => {
     try {
@@ -46,10 +44,26 @@ export default function TabsMain() {
   const projectsToDisplay = projects.slice(startIndex, endIndex);
   const totalPages = Math.ceil(projects.length / cardsPerPage);
   const numTabsToShow = 3;
+
   let startTabIndex = currentPage - Math.floor(numTabsToShow / 2);
   let endTabIndex = startTabIndex + numTabsToShow - 1;
-  startTabIndex = Math.max(1, startTabIndex);
-  endTabIndex = Math.min(totalPages, endTabIndex);
+
+  if (totalPages <= numTabsToShow) {
+    startTabIndex = 1;
+    endTabIndex = totalPages;
+  } else {
+    startTabIndex = Math.max(1, startTabIndex);
+    endTabIndex = Math.min(totalPages, endTabIndex);
+
+    if (currentPage <= Math.ceil(numTabsToShow / 2)) {
+      startTabIndex = 1;
+      endTabIndex = numTabsToShow;
+    } else if (currentPage >= totalPages - Math.floor(numTabsToShow / 2)) {
+      startTabIndex = totalPages - numTabsToShow + 1;
+      endTabIndex = totalPages;
+    }
+  }
+
   const tabsToShow = Array.from({ length: endTabIndex - startTabIndex + 1 }, (_, index) => startTabIndex + index);
 
   return (
@@ -61,7 +75,7 @@ export default function TabsMain() {
         />
       </div>
       <div className="flex-row-center gap-4 flex-wrap">
-        {projectsToDisplay.map((project: {_id: string, title: string, createdAt: string, description: string, projectManager: string, competences: string}) => {
+        {projectsToDisplay.map((project: {_id : string, title: string, createdAt: string, description: string, projectManager: string, competences: string}) => {
           const dateObject = new Date(project.createdAt);
           const day = dateObject.getDate().toString().padStart(2, '0');
           const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
@@ -85,6 +99,7 @@ export default function TabsMain() {
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious
+                className="cursor-pointer select-none"
                 onClick={() => {
                   if (currentPage > 1) {
                     setCurrentPage(currentPage - 1);
@@ -95,6 +110,7 @@ export default function TabsMain() {
             {tabsToShow.map((page) => (
               <PaginationItem key={page}>
                 <PaginationLink
+                  className="cursor-pointer select-none"
                   onClick={() => setCurrentPage(page)}
                   isActive={currentPage === page}
                 >
@@ -104,6 +120,7 @@ export default function TabsMain() {
             ))}
             <PaginationItem>
               <PaginationNext
+                className="cursor-pointer select-none"
                 onClick={() => {
                   if (currentPage < totalPages) {
                     setCurrentPage(currentPage + 1);
