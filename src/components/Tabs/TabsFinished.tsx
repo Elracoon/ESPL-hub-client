@@ -68,6 +68,7 @@ export default function TabsFinished() {
 
             return (
               <CardProject
+                id={project._id}
                 key={project._id}
                 title={project.title}
                 date={formattedDate}
