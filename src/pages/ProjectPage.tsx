@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { Icons } from "@/components/ui/icons";
@@ -18,6 +17,7 @@ export default function ProjectPage() {
   const [createdAt, setCreatedAt] = useState("");
   const [projectManagerEmail, setProjectManagerEmail] = useState("");
   const navigate = useNavigate();
+  const { projectId } = useParams();
 
   if (!token) {
     return <RedirectPageAuth />;
@@ -35,7 +35,7 @@ export default function ProjectPage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/projects/65c23d48ee19bad2af264bae`,
+        `${import.meta.env.VITE_BASE_URL}/projects/${projectId}`,
         {
           method: "GET",
           headers: {
