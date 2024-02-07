@@ -15,21 +15,22 @@ import {
 const cardsPerPage = 6;
 
 export default function TabsMain() {
-  const token = useStore();
+  const { token, bearerToken } = useStore();
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  var bearer = 'Bearer ' + token.token;
-
   const getProjects = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/projects`, {
-        method: "GET",
-        headers: {
-          "Authorization": bearer,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/projects`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: bearerToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       setProjects(data);
     } catch (error) {
@@ -50,7 +51,10 @@ export default function TabsMain() {
   let endTabIndex = startTabIndex + numTabsToShow - 1;
   startTabIndex = Math.max(1, startTabIndex);
   endTabIndex = Math.min(totalPages, endTabIndex);
-  const tabsToShow = Array.from({ length: endTabIndex - startTabIndex + 1 }, (_, index) => startTabIndex + index);
+  const tabsToShow = Array.from(
+    { length: endTabIndex - startTabIndex + 1 },
+    (_, index) => startTabIndex + index
+  );
 
   return (
     <TabsContent value="projets" className="tabs-content-dashboard">
@@ -61,24 +65,36 @@ export default function TabsMain() {
         />
       </div>
       <div className="flex-row-center gap-4 flex-wrap">
-        {projectsToDisplay.map((project: {_id: string, title: string, createdAt: string, description: string, projectManager: string, competences: string}) => {
-          const dateObject = new Date(project.createdAt);
-          const day = dateObject.getDate().toString().padStart(2, '0');
-          const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-          const year = dateObject.getFullYear();
-          const formattedDate = `${day}/${month}/${year}`;
+        {projectsToDisplay.map(
+          (project: {
+            _id: string;
+            title: string;
+            createdAt: string;
+            description: string;
+            projectManager: string;
+            competences: string;
+          }) => {
+            const dateObject = new Date(project.createdAt);
+            const day = dateObject.getDate().toString().padStart(2, "0");
+            const month = (dateObject.getMonth() + 1)
+              .toString()
+              .padStart(2, "0");
+            const year = dateObject.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
 
-          return (
-            <CardProject
-              key={project._id}
-              title={project.title}
-              date={formattedDate}
-              description={project.description}
-              owner={project.projectManager}
-              skills={project.competences}
-            />
-          );
-        })}
+            return (
+              <CardProject
+                key={project._id}
+                id={project._id}
+                title={project.title}
+                date={formattedDate}
+                description={project.description}
+                owner={project.projectManager}
+                skills={project.competences}
+              />
+            );
+          }
+        )}
       </div>
       {totalPages > 1 && (
         <Pagination className="mt-8">
