@@ -21,7 +21,7 @@ export default function TabsInProgress() {
 
   const getProjectsInProgress = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/projects/status/inProgress`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/projects/status/in progress`, {
         method: "GET",
         headers: {
           "Authorization": bearer,
