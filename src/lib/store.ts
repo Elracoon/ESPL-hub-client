@@ -23,6 +23,15 @@ interface Store {
   setToken: (value: string) => void;
 }
 
+interface Projet {
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  projectManager: string;
+  managerEmail: string;
+}
+
 const useStore = create<Store>((set) => ({
   token: savedToken ?? "",
   isDeleting: false,

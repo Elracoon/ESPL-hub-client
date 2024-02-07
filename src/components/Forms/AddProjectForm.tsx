@@ -47,6 +47,8 @@ export default function AddProjectForm() {
       );
 
       if (response.ok) {
+        const project = await response.json();
+        setProjects((projects) => [...projects, project]);
         navigate("/", { replace: true });
         toast.success("Projet créé avec succès");
       } else {
